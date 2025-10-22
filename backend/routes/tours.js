@@ -8,8 +8,8 @@ const {
 } = require("../controllers/tourController");
 
 router.get("/", getAllTours);
-router.post("/create", createTour);
-router.put("/update/:id", updateTour);
-router.delete("/delete/:id", deleteTour);
+router.post("/", createTour);
+router.put("/:id", updateTour);
+router.delete("/:id", deleteTour);
 
 module.exports = router;
