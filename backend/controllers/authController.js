@@ -1,42 +1,48 @@
 const db = require("../db");
 const bcrypt = require("bcryptjs");
 
+/**
+ * Register new account
+ */
 exports.register = (req, res) => {
-  const { full_name, email, password, role } = req.body;
+  const { full_name, email, password, phone, role } = req.body;
 
-  // Kiểm tra email trùng
-  const checkSql = "SELECT * FROM users WHERE email = ?";
-  db.query(checkSql, [email], (err, results) => {
-    if (err) return res.status(500).json({ message: "Database error" });
-    if (results.length > 0) return res.status(400).json({ message: "Email already exists" });
+  if (!full_name || !email || !password)
+    return res.status(400).json({ message: "Missing required fields" });
 
-    // Mã hoá mật khẩu
-    const hashedPassword = bcrypt.hashSync(password, 10);
+  const hash = bcrypt.hashSync(password, 10);
+  const sql = `INSERT INTO users (full_name, email, password_hash, phone, role)
+               VALUES (?, ?, ?, ?, ?)`;
 
-    const sql = "INSERT INTO users (full_name, email, password, role) VALUES (?, ?, ?, ?)";
-    db.query(sql, [full_name, email, hashedPassword, role || "user"], (err, result) => {
-      if (err) return res.status(500).json({ message: "Register failed" });
-      res.status(200).json({ message: "Register success", user_id: result.insertId });
-    });
+  db.query(sql, [full_name, email, hash, phone || null, role || "customer"], (err) => {
+    if (err) {
+      if (err.code === "ER_DUP_ENTRY")
+        return res.status(400).json({ message: "Email already exists" });
+      return res.status(500).json({ error: err });
+    }
+
+    res.status(201).json({ message: "User registered successfully!" });
   });
 };
 
+/**
+ * Login user
+ */
 exports.login = (req, res) => {
   const { email, password } = req.body;
-  const sql = "SELECT * FROM users WHERE email = ?";
-  db.query(sql, [email], (err, results) => {
-    if (err) return res.status(500).json({ message: "Database error" });
-    if (results.length === 0) return res.status(404).json({ message: "User not found" });
 
-    const user = results[0];
-    const valid = bcrypt.compareSync(password, user.password);
-    if (!valid) return res.status(401).json({ message: "Invalid password" });
+  if (!email || !password)
+    return res.status(400).json({ message: "Missing email or password" });
 
-    res.status(200).json({
-      message: "Login success",
-      user_id: user.user_id,
-      role: user.role,
-      full_name: user.full_name
-    });
+  db.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
+    if (err) return res.status(500).json({ error: err });
+    if (!result.length) return res.status(404).json({ message: "User not found" });
+
+    const user = result[0];
+    const valid = bcrypt.compareSync(password, user.password_hash);
+    if (!valid) return res.status(401).json({ message: "Invalid credentials" });
+
+    delete user.password_hash;
+    res.status(200).json({ message: "Login successful", user });
   });
 };
