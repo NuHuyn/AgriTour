@@ -1,0 +1,39 @@
+.header{
+  width: 100%;
+  height: 80vh; /* hoặc 34vw nếu muốn responsive theo chiều ngang */
+  margin: 30px auto;
+  background: url('/header.jpg') no-repeat center center;
+  background-size: cover; /* giúp ảnh tràn full */
+  border-radius: 15px; /* bo góc như ảnh mẫu */
+  position: relative;
+  overflow: hidden;
+}
+.header-contents{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1.5vw;
+  max-width: 55%;
+  bottom:10%;
+  left:6vw;
+  animation: fadeIn 3s;
+}
+.header-contents h2{
+  font-weight: 500px;
+  color:azure;
+  font-size: max(4.5vw , 22px);
+}
+.header-contents p{
+  color:azure;
+  font-size: 1.2vw;
+}
+.header-contents button{
+  border: none;
+  color:rgb(21, 55, 21);
+  font-weight: 500;
+  padding: 1vw 2.3vw;
+  background-color: azure;
+  font-size: max(1vw,13px);
+  border-radius: 50px;
+}
