@@ -1,28 +1,27 @@
 const db = require("../db");
 
+// 🧩 Make a payment
 exports.createPayment = (req, res) => {
   const { booking_id, amount, payment_method } = req.body;
+
   const sql = `
-    INSERT INTO payments (booking_id, amount, payment_method)
-    VALUES (?, ?, ?)
+    INSERT INTO payments (booking_id, amount, payment_method, status)
+    VALUES (?, ?, ?, 'paid')
   `;
   db.query(sql, [booking_id, amount, payment_method], (err, result) => {
-    if (err) return res.status(500).json({ message: "Error creating payment" });
-    const updateBooking = "UPDATE bookings SET status='paid' WHERE booking_id=?";
-    db.query(updateBooking, [booking_id]);
-    res.json({ message: "Payment successful", payment_id: result.insertId });
+    if (err) return res.status(500).json({ error: err });
+
+    // Update booking status to confirmed
+    db.query("UPDATE bookings SET status = 'confirmed' WHERE booking_id = ?", [booking_id]);
+    res.json({ message: "Payment completed successfully!" });
   });
 };
 
-exports.getPayments = (req, res) => {
-  const sql = `
-    SELECT p.*, b.user_id, t.name AS tour_name
-    FROM payments p
-    JOIN bookings b ON p.booking_id = b.booking_id
-    JOIN tours t ON b.tour_id = t.tour_id
-  `;
-  db.query(sql, (err, data) => {
-    if (err) return res.status(500).json({ message: "Error fetching payments" });
-    res.json(data);
+// 🧩 Get all payments (admin)
+exports.getAllPayments = (req, res) => {
+  db.query("SELECT * FROM payments", (err, result) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(result);
   });
 };
+
