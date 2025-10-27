@@ -1,6 +1,7 @@
 import banner from './banner.jpg';
 import search_icon from './search-icon.png';
 import basket_icon from './basket.png';
+import cross_icon from './cross-icon.png';
 import central_vietnam from './central-vietnam.jpg';
 import daklak from './daklak.webp';
 import education from './education.jpg';
@@ -33,6 +34,7 @@ export const assets = {
   banner,
   search_icon,
   basket_icon,
+  cross_icon,
   central_vietnam,
   daklak,
   education,
