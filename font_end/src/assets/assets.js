@@ -29,8 +29,11 @@ import trip5 from './trip5.jpg';
 import trip6 from './trip6.jpg';
 import trip7 from './trip7.jpg';
 import trip8 from './trip8.jpg';
+import user_icon from './user-icon.webp';
+
 
 export const assets = {
+  user_icon,
   banner,
   search_icon,
   basket_icon,
