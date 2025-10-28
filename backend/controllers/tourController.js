@@ -1,63 +1,5 @@
-/*const db = require("../db");
-
-// 🧩 Create tour (partner or admin)
-exports.createTour = (req, res) => {
-  const {
-    tour_name, description, location, region_id, category_id,
-    start_date, end_date, price, available_slots, image_url, created_by
-  } = req.body;
-
-  const sql = `
-    INSERT INTO tours (tour_name, description, location, region_id, category_id,
-                       start_date, end_date, price, available_slots, image_url, created_by)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `;
-  db.query(sql, [tour_name, description, location, region_id, category_id,
-                 start_date, end_date, price, available_slots, image_url, created_by],
-    (err) => {
-      if (err) return res.status(500).json({ error: err });
-      res.json({ message: "Tour submitted for approval." });
-    });
-};
-
-// 🧩 Approve / reject tour (admin)
-exports.approveTour = (req, res) => {
-  const { tour_id, admin_id, action, note } = req.body;
-  const sql1 = "UPDATE tours SET status = ? WHERE tour_id = ?";
-  const sql2 = `
-    INSERT INTO tour_approval_logs (tour_id, admin_id, action, note)
-    VALUES (?, ?, ?, ?)
-  `;
-
-  db.beginTransaction((err) => {
-    if (err) return res.status(500).json({ error: err });
-    db.query(sql1, [action, tour_id], (err1) => {
-      if (err1) return db.rollback(() => res.status(500).json({ error: err1 }));
-      db.query(sql2, [tour_id, admin_id, action, note], (err2) => {
-        if (err2) return db.rollback(() => res.status(500).json({ error: err2 }));
-        db.commit(() => res.json({ message: `Tour ${action} successfully.` }));
-      });
-    });
-  });
-};
-
-// 🧩 Get all tours (public)
-exports.getAllTours = (req, res) => {
-  const sql = `
-    SELECT t.*, u.full_name AS creator_name, c.category_name, r.region_name
-    FROM tours t
-    LEFT JOIN users u ON t.created_by = u.user_id
-    LEFT JOIN categories c ON t.category_id = c.category_id
-    LEFT JOIN regions r ON t.region_id = r.region_id
-  `;
-  db.query(sql, (err, result) => {
-    if (err) return res.status(500).json({ error: err });
-    res.json(result);
-  });
-};
-*/
-// controllers/tourController.js
 const db = require("../db");
+const path = require("path");
 
 // Lấy tất cả tour
 exports.getAllTours = (req, res) => {
@@ -95,29 +37,59 @@ exports.getToursByCategory = (req, res) => {
   });
 };
 
-// Tạo tour
+// ===============================
+// 📌 Tạo tour mới (có upload ảnh)
+// ===============================
 exports.createTour = (req, res) => {
-  const { tour_name, description, location, region_id, category_id, start_date, end_date, price, available_slots, created_by } = req.body;
+  const {
+    tour_name,
+    description,
+    location,
+    region_id,
+    category_id,
+    start_date,
+    end_date,
+    price,
+    available_slots,
+    created_by
+  } = req.body;
+
+  // Nếu có file ảnh
+  const image_url = req.file ? `/uploads/tours/${req.file.filename}` : null;
+
   const sql = `
-    INSERT INTO tours (tour_name, description, location, region_id, category_id, start_date, end_date, price, available_slots, created_by)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO tours (tour_name, description, location, region_id, category_id,
+                       start_date, end_date, price, available_slots, created_by, image_url)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
-  db.query(sql, [tour_name, description, location, region_id, category_id, start_date, end_date, price, available_slots, created_by], (err) => {
-    if (err) return res.status(500).json({ error: err });
-    res.json({ message: "Tour created successfully!" });
-  });
+
+  db.query(
+    sql,
+    [tour_name, description, location, region_id, category_id, start_date, end_date, price, available_slots, created_by, image_url],
+    (err) => {
+      if (err) return res.status(500).json({ error: err });
+      res.json({ message: "Tour created successfully!" });
+    }
+  );
 };
 
-// Cập nhật tour
+// ===============================
+// 📌 Cập nhật tour (có thể thay ảnh)
+// ===============================
 exports.updateTour = (req, res) => {
   const { tour_id } = req.params;
   const data = req.body;
+
+  // Nếu có file ảnh mới, cập nhật thêm image_url
+  if (req.file) {
+    data.image_url = `/uploads/tours/${req.file.filename}`;
+  }
+
   db.query("UPDATE tours SET ? WHERE tour_id = ?", [data, tour_id], (err) => {
     if (err) return res.status(500).json({ error: err });
     res.json({ message: "Tour updated successfully!" });
   });
 };
-
 // Duyệt tour
 exports.approveTour = (req, res) => {
   const { tour_id } = req.params;
