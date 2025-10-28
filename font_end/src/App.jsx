@@ -14,7 +14,7 @@ const App = () => {
     <>
       {showLogin && <LoginPopup setShowLogin={setShowLogin} setUser={setUser} />} 
       <div className="app">
-        <Navbar setShowLogin={setShowLogin} user={user} /> {/* 👈 truyền user xuống */}
+        <Navbar setShowLogin={setShowLogin} user={user} setUser={setUser} /> {/* 👈 truyền user xuống */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
