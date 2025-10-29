@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './loginPopup.css';
 import { assets } from '../../assets/assets';
 
@@ -10,6 +11,8 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
     password: "",
     phone: ""
   });
+
+  const navigate = useNavigate(); // dung de chuyen trang
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,6 +51,16 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
         console.log("User data:", data.user);
         setUser(data.user); // Cập nhật thông tin user lên App.jsx
         setShowLogin(false);
+
+        // Chuyển hướng sau khi đăng nhập/đăng ký thành công
+        // Điều hướng theo role
+        if (data.user.role === "partner") {
+          navigate("/partner/dashboard");
+        } else if (data.user.role === "admin") {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/"); // customer hoặc guest quay về trang chủ
+        }
       }
     } catch (err) {
       console.error("Error:", err);
