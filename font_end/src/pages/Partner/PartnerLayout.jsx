@@ -6,6 +6,7 @@ import PartnerCustomers from './PartnerCustomers';
 import PartnerReports from './PartnerReports';
 import PartnerSettings from './PartnerSettings';
 import './partnerLayout.css';
+import CreateTour from './CreateTour';
 
 
 const PartnerLayout = ({ user }) => {
@@ -28,11 +29,12 @@ const PartnerLayout = ({ user }) => {
 
       <main className="partner-main">
         <Routes>
-          <Route path="dashboard" element={<PartnerDashboard />} />
-          <Route path="tours" element={<PartnerTours />} />
+          <Route path="dashboard" element={<PartnerDashboard user={user} />} />
+          <Route path="tours" element={<PartnerTours user={user}/>} />
           <Route path="customers" element={<PartnerCustomers />} />
           <Route path="reports" element={<PartnerReports />} />
           <Route path="settings" element={<PartnerSettings />} />
+          <Route path="tours/create" element={<CreateTour user={user} />} />
         </Routes>
       </main>
     </div>

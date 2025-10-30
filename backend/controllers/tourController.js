@@ -1,13 +1,29 @@
 const db = require("../db");
 const path = require("path");
 
-// Lấy tất cả tour
 exports.getAllTours = (req, res) => {
-  db.query("SELECT * FROM tours", (err, result) => {
-    if (err) return res.status(500).json({ error: err });
-    res.json(result);
-  });
-};
+  const { created_by, role } = req.query;
+
+  let sql = "SELECT * FROM tours";
+  const params = [];
+
+  if (role === "partner") {
+  sql += " WHERE created_by = ?";
+  params.push(created_by);
+}
+
+db.query(sql, params, (err, result) => {
+  if (err) {
+    console.error("❌ Query error:", err);
+    return res.status(500).json({ error: err });
+  }
+  res.json(result);
+});
+}
+
+
+
+
 
 // Lấy tour theo ID
 exports.getTourById = (req, res) => {
@@ -51,23 +67,29 @@ exports.createTour = (req, res) => {
     end_date,
     price,
     available_slots,
-    created_by
+    created_by,
+    role, // 👈 thêm dòng này
   } = req.body;
 
-  // Nếu có file ảnh
   const image_url = req.file ? `/uploads/tours/${req.file.filename}` : null;
+
+  // ✅ Nếu admin tạo tour thì duyệt luôn, partner thì chờ duyệt
+  const status = role === "admin" ? "approved" : "pending";
 
   const sql = `
     INSERT INTO tours (tour_name, description, location, region_id, category_id,
-                       start_date, end_date, price, available_slots, created_by, image_url)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                       start_date, end_date, price, available_slots, created_by, image_url, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   db.query(
     sql,
-    [tour_name, description, location, region_id, category_id, start_date, end_date, price, available_slots, created_by, image_url],
+    [tour_name, description, location, region_id, category_id, start_date, end_date, price, available_slots, created_by, image_url, status],
     (err) => {
-      if (err) return res.status(500).json({ error: err });
+      if (err) {
+        console.error("❌ Error inserting tour:", err);
+        return res.status(500).json({ error: err });
+      }
       res.json({ message: "Tour created successfully!" });
     }
   );

@@ -21,6 +21,10 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    /*console.log("Submitting tour, current user:", user); // 👈 kiểm tra
+    if (!user) return alert("Vui lòng đăng nhập trước!");
+    if (!user.token) return alert("User chưa có token. Vui lòng login lại!");
+    */
     const url =
       currState === "Login"
         ? "http://localhost:8081/api/auth/login"
@@ -49,7 +53,12 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
       } else {
         alert(data.message);
         console.log("User data:", data.user);
-        setUser(data.user); // Cập nhật thông tin user lên App.jsx
+
+        // save user + token to App.jsx
+        setUser({
+          ...data.user,
+          token: data.token
+         }); // Cập nhật thông tin user lên App.jsx
         setShowLogin(false);
 
         // Chuyển hướng sau khi đăng nhập/đăng ký thành công
