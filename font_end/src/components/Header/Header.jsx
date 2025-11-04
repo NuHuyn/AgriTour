@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.css'
 import { useState, useEffect } from 'react'
-
+import { Link } from 'react-router-dom';
 const Header = () => {
   const images = ['/banner1.jpg', '/header.jpg', '/banner2.jpg'];
 
@@ -29,7 +29,10 @@ const Header = () => {
         <p>
           Let's explore and select which places that you wanted to enjoy the natural lifestyle. In additionally, give yourself a chance to move out side the bustle and clustle city to dive into the fresh and peacefull atmostphere in rural.
         </p>
-        <button>Explore Tour</button>
+        <Link to="/tour" className="explore-tour-button">
+          Explore Tour
+        </Link>
+ 
       </div>
        <button className="nav-btn prev" onClick={handlePrev}>❮</button>
        <button className="nav-btn next" onClick={handleNext}>❯</button>

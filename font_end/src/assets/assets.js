@@ -297,7 +297,7 @@ export const tour =[
   },
   {
     id: 14,
-    tour_name:"Phong Nha-Ke Bang National Park",
+    tour_name:"Ninh Binh Riverside",
     tour_image: river4,
     region: "Central",
     price: "100$ per person",

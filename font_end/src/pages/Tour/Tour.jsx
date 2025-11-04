@@ -3,7 +3,7 @@ import './Tour.css';
 import { list_tour_1, list_tour_2, tour } from '../../assets/assets';
 import RegionSelector from '../../components/region/RegionSelector';
 import { StoreContext } from '../../context-store/StoreContext';
-
+import { Link } from 'react-router-dom';
 const Tour = () => {
   const { region } = useContext(StoreContext);
   const regionSectionRef = useRef(null);
@@ -42,10 +42,15 @@ const Tour = () => {
             <div key={tour.id || index} className='explore-tour-item'>
               <img src={tour.tour_image} alt={tour.tour_name} />
               <h3>{tour.tour_name}</h3>
-              <p>Price: {tour.price}</p>
               <p>Start Date: {tour.start_date}</p>
               <p>Period: {tour.period}</p>
               <p>Slot: {tour.available ? "Available" : "Fully booked"}</p>
+              <div className="tour-price-row">
+              <p className="tour-price">{tour.price}</p>
+              <Link to={`/tour-details/${tour.id}`} className="tour-link-button">
+                <button>View Details</button>
+              </Link>
+            </div>
             </div>
           ))}
         </div>
@@ -63,10 +68,15 @@ const Tour = () => {
             <div key={tour.id || index} className='explore-tour-item'>
               <img src={tour.tour_image} alt={tour.tour_name} />
               <h3>{tour.tour_name}</h3>
-              <p>Price: {tour.price}</p>
               <p>Start Date: {tour.start_date}</p>
               <p>Period: {tour.period}</p>
               <p>Slot: {tour.available ? "Available" : "Fully booked"}</p>
+              <div className="tour-price-row">
+              <p className="tour-price">{tour.price}</p>
+              <Link to={`/tour-details/${tour.id}`} className="tour-link-button">
+                <button>View Details</button>
+              </Link>
+            </div>
             </div>
           ))}
         </div>
@@ -82,10 +92,15 @@ const Tour = () => {
           <div key={tour.id || `${tour.tour_name}-${index}`} className="main-tour-item">
             <img src={tour.tour_image} alt={tour.tour_name} />
             <h3>{tour.tour_name}</h3>
-            <p>Price: {tour.price}</p>
             <p>Start Date: {tour.start_date}</p>
             <p>Period: {tour.period}</p>
             <p>Slot: {tour.available ? "Available" : "Fully booked"}</p>
+            <div className="tour-price-row">
+              <p className="tour-price">{tour.price}</p>
+              <Link to={`/tour-details/${tour.id}`} className="tour-link-button">
+                <button>View Details</button>
+              </Link>
+            </div>
           </div>
           ))}
           </div> 

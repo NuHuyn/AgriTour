@@ -38,7 +38,8 @@
   font-size: 1.2vw;
    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
 }
-.header-contents button{
+
+.explore-tour-button {
   border: none;
   color:rgb(21, 55, 21);
   font-weight: 500;
@@ -46,11 +47,13 @@
   background-color: azure;
   font-size: max(1vw,13px);
   border-radius: 50px;
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.explore-tour-button:hover {
+  background-color: #a8ccaf;
 
-.header-contents button:hover {
-  background-color: #eaf5ec;
 }
 
 /* Nút điều hướng */
