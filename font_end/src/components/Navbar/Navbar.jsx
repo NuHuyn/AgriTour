@@ -32,16 +32,7 @@ const Navbar = ({ setShowLogin, user, setUser }) => {
              <Link to='/cart'><img src={assets.basket_icon} alt="" className="basket-icon" /></Link>
              <div className="dot"></div>
         </div>
-        <button onClick={() => setShowLogin(true)}>Sign in</button>
-      </div>
-      <div className="navbar-right">
-        <img src={assets.search_icon} alt="" className="search-icon-logo" />
-        <div className="navbar-search-icon">
-          <img src={assets.basket_icon} alt="" className="basket-icon" />
-          <div className="dot"></div>
-        </div>
-
-        {/* ✅ Nếu có user thì hiện avatar + tên */}
+         {/* ✅ Nếu có user thì hiện avatar + tên */}
         {user ? (
           <div className="navbar-user-info">
             <div

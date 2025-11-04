@@ -72,32 +72,92 @@ export const list_tour_1 = [
   id: 1,
   tour_name: "Northern Vietnam Scenic Tour",
   tour_image: north,
-  region: "North"
+  price: "50$ per person",
+  region: "North",
+  start_date: "2026-1-10",
+  period: "6 days 5 nights",
+  available: true
   },
   
   {
   id:2,
   tour_name: "Central Vietnam Cultural Tour",
   tour_image: central_vietnam,
-  region: "Central"
+  region: "Central",
+  price: "100$ per person",
+  start_date: "2026-1-19",
+  period: "4 days 3 nights",
+  available: true
   },
   {
   id: 3,
   tour_name: "South Vietnam Highlights",
   tour_image: southwestern_vietnam,
-  region: "South"
+  region: "South",
+  price: "80$ per person",
+  start_date: "2026-1-10",
+  period: "4 days 3 nights",
+  available: true
   },
   {
   id: 4,
   tour_name: "Highland Adventure",
   tour_image: daklak,
-  region: "Central"
+  region: "Central",
+  price: "80$ per person",
+  start_date: "2026-2-10",
+  period: "4 days 3 nights",
+  available: true
   },
   {
-  id: 5,
+  id: 23,
   tour_name: "Hanoi City Exploration",
   tour_image: hanoi,
-  region: "North"
+  region: "North",
+  price: "90$ per person",
+  start_date: "2026-5-10",
+  period: "4 days 3 nights",
+  available: true
+  },
+  {
+  id: 24,
+  tour_name: "Sapa Mountain Trek",
+  tour_image: sapa_webp,
+  region: "North",
+  price: "40$ per person",
+  start_date: "2026-3-10",
+  period: "4 days 3 nights",
+  available: true
+  },
+  {
+    id: 25,
+    tour_name: "Vi Da Village Visit",
+    tour_image:trip4,
+    region: "Central",
+    price: "70$ per person",
+    start_date: "2026-3-20",
+    period: "4 days 3 nights",
+    available: true
+  },
+  {
+    id: 26,
+    tour_name: "Dak Lak Organization Tour",
+    tour_image: ogranization,
+    region: "Central",
+    price: "60$ per person",
+    start_date: "2026-7-20",
+    period: "4 days 3 nights",
+    available: true
+  },
+  {
+    id: 28,
+    tour_name: "Gia Lai Discovery",
+    tour_image: trip5,
+    region: "Central",
+    price: "80$ per person",
+    start_date: "2026-1-10",
+    period: "4 days 3 nights",
+    available: true
   }
 ];
 
@@ -106,31 +166,91 @@ export const list_tour_2 = [
   id:5,
   tour_name: "Ben Tre Tour",
   tour_image: education2,
-  region: "South"
+  region: "South",
+  price: "40$ per person",
+  start_date: "2026-1-24",
+  period: "4 days 3 nights",
+  available: true
   },
   {
   id:6,
   tour_name: "Mekong Delta Tour",
   tour_image: education3,
-  region: "South"
+  region: "South",
+  price: "50$ per person",
+  start_date: "2026-1-15",
+  period: "4 days 3 nights",
+  available: true
   },
   {
   id:7,
   tour_name: "Can Tho City Tour",
   tour_image: education4,
-  region: "South"
+  region: "South",
+  price: "30$ per person",
+  start_date: "2026-1-20",
+  period: "3 days 2 nights",
+  available: true
   },
   {
   id:8,
   tour_name: "Tra Su Cajuput Forest",
   tour_image: education5,
-  region: "South"
+  region: "South",
+  price: "80$ per person",
+  start_date: "2026-5-10",
+  period: "4 days 3 nights",
+  available: true
   },
   {
   id:9,
   tour_name: "Education and Beauty Tour",
   tour_image: education_beaty,
-  region: "Central"
+  region: "Central",
+  price: "30$ per person",
+  start_date: "2026-8-10",
+  period: "4 days 3 nights",
+  available: true
+  },
+  {
+  id: 20,
+  tour_name:"Bac Ninh",
+  tour_image: trip4,
+  region: "North",
+  price: "80$ per person",
+  start_date: "2026-1-10",
+  period: "4 days 3 nights",
+  available: true
+  },
+  {
+  id: 21,
+  tour_name:"Ninh Binh",
+  tour_image: river2,
+  region: "North",
+  price: "60$ per person",
+  start_date: "2026-3-10",
+  period: "4 days 3 nights",
+  available: true
+  },
+  {
+  id: 22,
+  tour_name:"Ha Giang",
+  tour_image: river3,
+  region: "North",
+  price: "70$ per person",
+  start_date: "2026-4-10",
+  period: "4 days 3 nights",
+  available: true
+  },
+  {
+    id: 27,
+    tour_name: "Agritour Experience",
+    tour_image: education3,
+    region: "South",
+    price: "90$ per person",
+    start_date: "2026-6-15",
+    period: "4 days 3 nights",
+    available: true
   }
 ];
 
@@ -139,48 +259,80 @@ export const tour =[
     id: 10,
     tour_name:"Vinh Long",
     tour_image: trip1,
-    region: "South"
+    region: "South",
+    price: "80$ per person",
+    start_date: "2026-5-10",
+    period: "4 days 3 nights",
+    available: true
   },
   {
     id: 11,
     tour_name:"Cai Be Floating Market",
     tour_image: river,
-    region: "South"
+    region: "South",
+    price: "70$ per person",
+    start_date: "2026-2-10",
+    period: "4 days 3 nights",
+    available: true
   },
   {
     id: 12,
     tour_name:"Ha Tien",
     tour_image: river2,
-    region: "South"
+    region: "South",
+    price: "60$ per person",
+    start_date: "2026-3-10",
+    period: "4 days 3 nights",
+    available: true
   },
   {
     id: 13,
     tour_name:"Hue City",
     tour_image: river3,
-    region: "Central"
+    region: "Central",
+    price: "90$ per person",
+    start_date: "2026-4-10",
+    period: "4 days 3 nights",
+    available: true
   },
   {
     id: 14,
     tour_name:"Phong Nha-Ke Bang National Park",
     tour_image: river4,
-    region: "Central"
+    region: "Central",
+    price: "100$ per person",
+    start_date: "2026-6-10",
+    period: "4 days 3 nights",
+    available: true
   },
   {
     id: 15,
     tour_name:"Sapa Trekking",
     tour_image: sapa,
-    region: "North"
+    region: "North",
+    price: "120$ per person",
+    start_date: "2026-7-10",
+    period: "4 days 3 nights",
+    available: true
   },
   {
     id: 16,
     tour_name:"Bac Lieu",
     tour_image: trip2,
-    region: "South"
+    region: "South",
+    price: "80$ per person",
+    start_date: "2026-5-10",
+    period: "4 days 3 nights",
+    available: true
   },
   {
     id: 17,
     tour_name:"Tra Vinh",
     tour_image: trip3,
-    region: "South"
+    region: "South",
+    price: "70$ per person",
+    start_date: "2026-8-10",
+    period: "4 days 3 nights",
+    available: true
   }
 ];

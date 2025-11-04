@@ -1,9 +1,14 @@
 
-.explore-tour,.explore-tour-2 {
+.explore-tour,.explore-tour-2,.main-region-tour {
   display: flex;
   flex-direction: column;
   gap: 20px;
   justify-content: center;
+}
+.explore-tour h2 ,.explore-tour-2 h2,.main-region-tour h2 {
+  font-size: max(2vw,18px);
+  color: rgb(21, 55, 21);
+  font-weight: 500;
 }
 .explore-tour-2 {
   margin-top: 50px;
@@ -14,7 +19,7 @@
   font-weight: 500;
 }
 .explore-tour-description {
-  max-width: 60%;
+  max-width: 100%;
   columns: #808080;
 }
 .explore-tour p {
@@ -24,17 +29,23 @@
   font-size: max(1.2vw,16px);
 }
 .explore-tour-list {
- display: flex;
-  justify-content: space-between;
-  gap: 50px;
-  align-items: center; /* canh giữa ảnh và text */
-  margin-top: 10px;
-  overflow-x: scroll;
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scroll-behavior: smooth;
 }
 .explore-tour-item {
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+  flex: 0 0 280px; /* không co giãn, mỗi item rộng 300px */
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  
+  transition: transform 0.3s ease;
+}
+.explore-tour-item:hover {
+  transform: translateY(-5px);
 }
 .explore-tour-list::-webkit-scrollbar {
   display: none; /* chiều cao của thanh cuộn ngang */
@@ -42,10 +53,9 @@
 
 /* Ảnh tour */
 .explore-tour-item img {
-  width: 120%;
-  height: 130px; /* hoặc 250px tùy bạn */
+  width: 150%;
+  height: 150px; /* hoặc 250px tùy bạn */
   object-fit: cover;
-  border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
@@ -62,4 +72,57 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
   transform: scale(1.05);
   padding: 2px;
+}
+/* Grid container */
+.main-tour-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+  
+}
+
+/* Tour item */
+.main-tour-item {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.main-tour-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Tour image */
+.main-tour-item img {
+  width: 200%;
+  height: 150px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+/* Tour name */
+.main-tour-item p {
+  padding: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+.explore-tour-item p {
+  padding: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+.main-tour-item h3, .explore-tour-item h3 {
+  margin: 10px 5px 5px 5px;
+  font-size: max(1.2vw,18px);
+  color: rgb(21, 55, 21);
 }

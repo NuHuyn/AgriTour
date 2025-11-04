@@ -14,7 +14,7 @@ const Tour = () => {
   const regionToursMain = tour.filter(tour => tour.region === region);
   const regionTours1 = list_tour_1.filter(tour => tour.region === region);
   const regionTours2 = list_tour_2.filter(tour => tour.region === region);
-  
+  const allRegionTours = [...regionToursMain, ...regionTours1, ...regionTours2];
   useEffect(() => {
   if (region !== 'All' && regionSectionRef.current) {
     regionSectionRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -41,7 +41,11 @@ const Tour = () => {
           {list_tour_1.map((tour, index) => (
             <div key={tour.id || index} className='explore-tour-item'>
               <img src={tour.tour_image} alt={tour.tour_name} />
-              <p>{tour.tour_name}</p>
+              <h3>{tour.tour_name}</h3>
+              <p>Price: {tour.price}</p>
+              <p>Start Date: {tour.start_date}</p>
+              <p>Period: {tour.period}</p>
+              <p>Slot: {tour.available ? "Available" : "Fully booked"}</p>
             </div>
           ))}
         </div>
@@ -58,47 +62,35 @@ const Tour = () => {
           {list_tour_2.map((tour, index) => (
             <div key={tour.id || index} className='explore-tour-item'>
               <img src={tour.tour_image} alt={tour.tour_name} />
-              <p>{tour.tour_name}</p>
+              <h3>{tour.tour_name}</h3>
+              <p>Price: {tour.price}</p>
+              <p>Start Date: {tour.start_date}</p>
+              <p>Period: {tour.period}</p>
+              <p>Slot: {tour.available ? "Available" : "Fully booked"}</p>
             </div>
           ))}
         </div>
       </div>
-
-          {/* ✅ Chỉ hiển thị khi đã chọn vùng */}
-        {showRegionTours && (
-          <div className="region-tour-section" ref={regionSectionRef}>
-            <h2>Tours in {region}</h2>
-
-            <div className="explore-tour-list">
-              {regionToursMain.map(tour => (
-                <div key={tour.id} className="explore-tour-item">
-                  <img src={tour.tour_image} alt={tour.tour_name} />
-                  <p>{tour.tour_name}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="explore-tour-list">
-              {regionTours1.map(tour => (
-                <div key={tour.id} className="explore-tour-item">
-                  <img src={tour.tour_image} alt={tour.tour_name} />
-                  <p>{tour.tour_name}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="explore-tour-list">
-              {regionTours2.map(tour => (
-                <div key={tour.id} className="explore-tour-item">
-                  <img src={tour.tour_image} alt={tour.tour_name} />
-                  <p>{tour.tour_name}</p>
-                </div>
-              ))}
-            </div>
+       
+      {showRegionTours && (
+         
+         
+        <div className="main-region-tour" ref={regionSectionRef}>
+         <h2>Tour in {region}</h2>
+          <div className="main-tour-list">
+          {allRegionTours.map((tour, index) => (
+          <div key={tour.id || `${tour.tour_name}-${index}`} className="main-tour-item">
+            <img src={tour.tour_image} alt={tour.tour_name} />
+            <h3>{tour.tour_name}</h3>
+            <p>Price: {tour.price}</p>
+            <p>Start Date: {tour.start_date}</p>
+            <p>Period: {tour.period}</p>
+            <p>Slot: {tour.available ? "Available" : "Fully booked"}</p>
           </div>
-        )}
-
-
+          ))}
+          </div> 
+        </div>
+     )}
     </>
   );
 };
