@@ -1,15 +1,49 @@
 import React from 'react'
 import './Header.css'
+import { useState, useEffect } from 'react'
 
 const Header = () => {
+  const images = ['/banner1.jpg', '/header.jpg', '/banner2.jpg'];
+
+   const [currentImage, setCurrentImage] = useState(0);
+
+  const handleNext = () => {
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleDotClick = (index) => {
+    setCurrentImage(index);
+  };
+
   return (
-    <div className='header'>
+    <div className='header'  style={{
+        backgroundImage: `url(${images[currentImage]})`
+      }}>
+      <div className="header-overlay"></div>
       <div className="header-contents">
         <h2>Find your interesting trip here </h2>
         <p>
           Let's explore and select which places that you wanted to enjoy the natural lifestyle. In additionally, give yourself a chance to move out side the bustle and clustle city to dive into the fresh and peacefull atmostphere in rural.
         </p>
-        <button>View Menu</button>
+        <button>Explore Tour</button>
+      </div>
+       <button className="nav-btn prev" onClick={handlePrev}>❮</button>
+       <button className="nav-btn next" onClick={handleNext}>❯</button>
+
+      {/* Các chấm điều hướng */}
+      <div className="dots-container">
+        {images.map((_, index) => (
+          <div
+            key={index}
+            className={`dot ${currentImage === index ? 'active' : ''}`}
+            onClick={() => handleDotClick(index)}
+          >
+          </div>
+        ))}
       </div>
     </div>
   )

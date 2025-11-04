@@ -1,0 +1,65 @@
+
+.explore-tour,.explore-tour-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+.explore-tour-2 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.explore-tour h1 {
+  color: rgb(21, 55, 21);
+  font-weight: 500;
+}
+.explore-tour-description {
+  max-width: 60%;
+  columns: #808080;
+}
+.explore-tour p {
+  font-size: max(1.2vw,16px);
+}
+.explore-tour-2 p {
+  font-size: max(1.2vw,16px);
+}
+.explore-tour-list {
+ display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  align-items: center; /* canh giữa ảnh và text */
+  margin-top: 10px;
+  overflow-x: scroll;
+}
+.explore-tour-item {
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+.explore-tour-list::-webkit-scrollbar {
+  display: none; /* chiều cao của thanh cuộn ngang */
+}
+
+/* Ảnh tour */
+.explore-tour-item img {
+  width: 120%;
+  height: 130px; /* hoặc 250px tùy bạn */
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.explore-tour-item p{
+  margin-top: 10px;
+  font-size: max(1.1vw,16px);
+  color: rgb(21, 55, 21);
+  cursor: pointer;
+}
+
+.explore-tour-item .active {
+  border: 4px solid #1c4e1d; /* Viền xanh lá khi được chọn */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: scale(1.05);
+  padding: 2px;
+}
