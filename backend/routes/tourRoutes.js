@@ -1,6 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const tourController = require("../controllers/tourController");
+const multer = require("multer");
+const path = require("path");
+
+// 🔹 Cấu hình nơi lưu ảnh
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "..", "uploads", "tours"));
+  },
+  filename: function (req, file, cb) {
+    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9) + path.extname(file.originalname);
+    cb(null, uniqueName);
+  }
+});
+
+const upload = multer({ storage });
+
 
 // === Public routes ===
 
@@ -8,38 +24,8 @@ const tourController = require("../controllers/tourController");
 router.get("/", tourController.getAllTours);
 
 // Lọc tour theo region hoặc category (phải đặt trước route :id)
-// Lọc tour theo region
-exports.getToursByRegion = (req, res) => {
-  const { region_id } = req.params;
-  const sql = `
-    SELECT t.*, r.region_name, c.category_name
-    FROM tours t
-    LEFT JOIN regions r ON t.region_id = r.region_id
-    LEFT JOIN categories c ON t.category_id = c.category_id
-    WHERE t.region_id = ?
-  `;
-  db.query(sql, [region_id], (err, result) => {
-    if (err) return res.status(500).json({ error: err });
-    res.json(result);
-  });
-};
-
-// Lọc tour theo category
-exports.getToursByCategory = (req, res) => {
-  const { category_id } = req.params;
-  const sql = `
-    SELECT t.*, r.region_name, c.category_name
-    FROM tours t
-    LEFT JOIN regions r ON t.region_id = r.region_id
-    LEFT JOIN categories c ON t.category_id = c.category_id
-    WHERE t.category_id = ?
-  `;
-  db.query(sql, [category_id], (err, result) => {
-    if (err) return res.status(500).json({ error: err });
-    res.json(result);
-  });
-};
-
+router.get("/filter/by-region/:region_id", tourController.getToursByRegion);
+router.get("/filter/by-category/:category_id", tourController.getToursByCategory);
 
 // Lấy tour theo ID
 router.get("/:tour_id", tourController.getTourById);
@@ -47,10 +33,10 @@ router.get("/:tour_id", tourController.getTourById);
 // === Partner/Admin routes ===
 
 // Tạo tour (partner hoặc admin)
-router.post("/", tourController.createTour);
+router.post("/", upload.single("image"), tourController.createTour);
 
 // Cập nhật tour (partner hoặc admin)
-router.put("/:tour_id", tourController.updateTour);
+router.put("/:tour_id", upload.single("image"), tourController.updateTour);
 
 // Admin duyệt hoặc từ chối tour
 router.put("/:tour_id/approve", tourController.approveTour);

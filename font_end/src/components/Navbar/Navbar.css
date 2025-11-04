@@ -60,3 +60,29 @@
   top: 0px;     /* hoặc -2px, tùy icon */
   right: 0px;
 }
+.navbar-user-info {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 8px 0;
+  min-width: 150px;
+  z-index: 10;
+}
+
+.user-dropdown p {
+  margin: 0;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.user-dropdown p:hover {
+  background-color: #f3f3f3;
+}
