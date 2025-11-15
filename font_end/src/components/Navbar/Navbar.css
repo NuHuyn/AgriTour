@@ -66,23 +66,26 @@
 
 .user-dropdown {
   position: absolute;
+  top: 100%;
   right: 0;
-  top: 40px;
   background-color: white;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   padding: 8px 0;
-  min-width: 150px;
-  z-index: 10;
+  z-index: 100;
+  min-width: 160px;
 }
 
 .user-dropdown p {
+  padding: 10px 16px;
   margin: 0;
-  padding: 8px 16px;
+  font-size: 14px;
+  color: #333;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .user-dropdown p:hover {
-  background-color: #f3f3f3;
+  background-color: #f0f0f0;
 }

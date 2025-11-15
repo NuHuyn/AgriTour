@@ -47,7 +47,7 @@
   background-color: azure;
   font-size: max(1vw,13px);
   border-radius: 50px;
-  z-index: 2;
+  z-index: 1;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

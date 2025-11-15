@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import './loginPopup.css';
 import { assets } from '../../assets/assets';
 
+
+
+
 const LoginPopup = ({ setShowLogin, setUser }) => {
   const [currState, setCurrState] = useState("Login");
   const [formData, setFormData] = useState({
@@ -11,6 +14,7 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
     password: "",
     phone: ""
   });
+   
 
   const navigate = useNavigate(); // dung de chuyen trang
 

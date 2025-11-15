@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import './Navbar.css'
 import { assets } from '../../assets/assets'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = ({ setShowLogin, user, setUser }) => {
   const [menu, setMenu] = useState("home");
   const [showMenu, setShowMenu] = useState(false); // 🔹 hiển thị menu khi clicke
-
+  const navigate = useNavigate();
   const handleLogout = () => {
     setUser(null);
     setShowMenu(false);
@@ -40,27 +42,53 @@ const Navbar = ({ setShowLogin, user, setUser }) => {
               onClick={() => setShowMenu(!showMenu)}
               style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
             >
-              <img
-                src={assets.user_icon}
-                alt="user"
-                className="user-icon"
-                style={{
-                  width: "32px",
-                  height: "32px",
-                  borderRadius: "50%",
-                  marginRight: "8px"
-                }}
-              />
-              <span>{user.full_name || user.email}</span>
+              {/* Avatar theo role */}
+      <img
+        src={
+          user.role === 'admin'
+            ? assets.admin_icon
+            : user.role === 'partner'
+            ? assets.partner_icon || assets.user_icon
+            : assets.user_icon
+        }
+        alt="user"
+        className="user-icon"
+        style={{
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          marginRight: "8px"
+        }}
+      />
+          {/* Tên hiển thị */}
+      <span>
+        {user.role === 'admin'
+          ? `Admin: ${user.full_name}`
+          : user.role === 'partner'
+          ? `Partner: ${user.full_name}`
+          : user.full_name || user.email}
+      </span>
+             
             </div>
 
-            {/* ✅ Dropdown menu */}
             {showMenu && (
               <div className="user-dropdown">
-                <p onClick={() => alert(`User: ${user.full_name}`)}>Personal information</p>
-                <p onClick={handleLogout}>Log out</p>
+                     
+                  
+                 {user.role === 'admin' && (
+                   <p onClick={() => navigate('/admin/dashboard')}>Admin Panel</p>
+                 )}
+                 
+                 {user.role === 'partner' && (
+                  <p onClick={() => navigate('/partner/dashboard')}>
+                    Partner Panel
+                  </p>
+                 )}
+                 <p onClick={() => alert(`User: ${user.full_name}`)}>Personal information</p>
+                 <p onClick={handleLogout}>Log out</p>
               </div>
             )}
+
           </div>
         ) : (
           <button onClick={() => setShowLogin(true)}>Sign in</button>
