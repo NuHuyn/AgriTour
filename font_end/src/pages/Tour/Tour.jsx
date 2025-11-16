@@ -4,6 +4,7 @@ import { list_tour_1, list_tour_2, tour } from '../../assets/assets';
 import RegionSelector from '../../components/region/RegionSelector';
 import { StoreContext } from '../../context-store/StoreContext';
 import { Link } from 'react-router-dom';
+import TourDetail from './TourDetail';
 const Tour = () => {
   const { region } = useContext(StoreContext);
   const regionSectionRef = useRef(null);
@@ -26,6 +27,12 @@ const Tour = () => {
     <>
       <div className='explore-tour' id='explore-tour'>
         <h1>Explore Tour</h1>
+        <p className="explore-welcome">
+         Welcome to AgriTour where is your gateway to Vietnam’s most authentic and breathtaking landscapes.  
+  From the misty mountains of the North, the cultural heartlands of the Central region  
+  to the peaceful rivers and vibrant fields of the South, every journey carries its own charm.  
+  Choose your region and begin an unforgettable adventure crafted just for you.
+        </p>
 
         {/* ✅ Chọn vùng */}
         <RegionSelector />
@@ -48,7 +55,7 @@ const Tour = () => {
               <div className="tour-price-row">
               <p className="tour-price">{tour.price}</p>
               <Link to={`/tour-details/${tour.id}`} className="tour-link-button">
-                <button>View Details</button>
+               <button>View Details</button>
               </Link>
             </div>
             </div>

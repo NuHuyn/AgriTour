@@ -15,6 +15,7 @@ import ManageCustomers from './pages/Admin/ManageCustomers';
 import ManageTours from './pages/Admin/ManageTours';
 import Settings from './pages/Admin/Settings';
 import ManagePartners from './pages/Admin/ManagePartners';
+import TourDetail from './pages/Tour/TourDetail';
 const AppContent = () => {
   const { user, setUser } = useAuth();
   const [showLogin, setShowLogin] = React.useState(false);
@@ -30,6 +31,7 @@ const AppContent = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/tour" element={<Tour />} />
+          <Route path="/tour-details/:id" element={<TourDetail />} />
           <Route path="/partner/*" element={<PartnerLayout user={user} />} />
           <Route path="/admin" element={<AdminLayout />}>
              <Route index element={<Dashboard />} /> {/* khi vào /admin tự vào dashboard */}

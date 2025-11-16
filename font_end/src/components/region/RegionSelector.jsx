@@ -4,40 +4,52 @@ import { StoreContext } from '../../context-store/StoreContext';
 import './RegionSelector.css';
 import { assets } from '../../assets/assets';
 const RegionSelector = () => {
-  const { region, setRegion } = useContext(StoreContext);
+  const { region, setRegion, filters, setFilters } = useContext(StoreContext);
 
   const handleSelect = (value) => {
     if (region === value) {
-      setRegion("All");     // ✅ click lần 2 → đóng
+      setRegion("All");
     } else {
-      setRegion(value);     // ✅ click lần 1 → mở
+      setRegion(value);
     }
   };
 
+  const handleFilterChange = (key, value) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
   return (
+    
+   
 
   <div className="region-field">
+     
     <div className="region-buttons">
       <button
-        className={region === 'North' ? 'active' : ''}
+        className={`region-bg-btn ${region === 'North' ? 'active' : ''}`}
         onClick={() => handleSelect('North')}
+        style={{ backgroundImage: `url(${assets.sapa})` }}
       >
-        North
+        <span>North</span>
       </button>
 
+
       <button
-        className={region === 'Central' ? 'active' : ''}
+        className={`region-bg-btn ${region === 'Central' ? 'active' : ''}`}
         onClick={() => handleSelect('Central')}
+        style={{ backgroundImage: `url(${assets.river2})` }}
       >
-        Central
+        <span>Central</span>
       </button>
 
       <button
-        className={region === 'South' ? 'active' : ''}
+        className={`region-bg-btn ${region === 'South' ? 'active' : ''}`}
         onClick={() => handleSelect('South')}
+        style={{ backgroundImage: `url(${assets.trip6})` }}
       >
-        South
+        <span>South</span>
       </button>
+
     </div>
   </div>
   );
