@@ -1,10 +1,19 @@
-import React from "react";
+import React,{useState,useContext} from "react";
 import { useParams } from "react-router-dom";
 import { tour, list_tour_1, list_tour_2 } from "../../assets/assets";
 import { tour_full_sample_list } from "../../assets/tour_sample_full";
+import { useAuth } from "../../context-store/AuthContext";
+import LoginPopup from "../../components/LoginPopup/LoginPopup";
+import BookingPopup from "../../components/BookingPopup/BookingPopup";
 import './TourDetail.css'
 const TourDetail = () => {
-  
+  const [showLogin, setShowLogin] = useState(false);
+  const [showBooking, setShowBooking] = useState(false);
+
+// lấy user từ Context
+  const { user, setUser } = useAuth();
+
+
   const { id } = useParams();
 
   // gom tất cả tour lại để tìm theo id
@@ -24,6 +33,18 @@ const selectedTour =
   if (!selectedTour) {
     return <h2 style={{ textAlign: "center", marginTop: "50px" }}>Tour not found</h2>;
   }
+   
+ const handleBookClick = () => {
+  if (!user) {
+    // ❌ Chưa login → bật popup login
+    setShowLogin(true);
+  } else {
+    // ✔ Đã login → mở popup booking
+    setShowBooking(true);
+  }
+};
+
+
 
   return (
     <div className="tour-detail-container">
@@ -139,11 +160,35 @@ const selectedTour =
   />
 
   {/* BUTTON */}
-  <button className="book-btn">BOOK TOUR NOW</button>
+  <button className="book-btn" onClick={handleBookClick}>
+     BOOK TOUR NOW
+  </button>
+
 
 </div>
 
       </div>
+
+      {/* POPUP LOGIN */}
+      {showLogin && (
+        <LoginPopup
+          setShowLogin={setShowLogin}
+          setUser={(u) => {
+            setUser(u);               
+            setShowBooking(true);     
+          }}
+        />
+      )}
+
+      {/* POPUP BOOKING */}
+      {showBooking && (
+        <BookingPopup
+          setShowBooking={setShowBooking}
+          selectedTour={selectedTour}
+          user={user}
+        />
+      )}
+
     </div>
   )
 }

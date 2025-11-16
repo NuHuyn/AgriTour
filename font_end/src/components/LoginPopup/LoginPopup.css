@@ -2,14 +2,19 @@
   width: 20px;
   cursor: pointer;
 }
-.login-popup{
-  position:absolute;
-  z-index:2;
+.login-popup {
+  position: fixed;   /* ⭐ phải là fixed */
+  top: 0;
+  left: 0;
   width: 100%;
-  height:100%;
+  height: 100%;
+  z-index: 9999;     /* ⭐ popup luôn đè trên mọi thứ */
   background-color: rgba(0,0,0,0.5);
-  display: grid;;
+
+  display: grid;
+  place-items: center;  /* căn giữa popup */
 }
+
 .login-popup-container{
   place-self: center;
   width: max(23vw,330px);

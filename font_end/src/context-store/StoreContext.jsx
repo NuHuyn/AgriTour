@@ -6,11 +6,13 @@ export const StoreContext = createContext(null)
 // Default export: a Provider component that wraps the app and supplies state
 const StoreContextProvider = ({ children }) => {
   // 👉 nếu cần state chung cho toàn app, khai báo ở đây
-  
+  const [user, setUser] = useState(null); 
   const [region, setRegion] = useState('All');
   const contextValue = {
     region,
-    setRegion
+    setRegion,
+    user,
+    setUser
   }
 
   return (

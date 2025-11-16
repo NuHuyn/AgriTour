@@ -13,13 +13,20 @@ export const AuthProvider = ({ children }) => {
   });
   */
     
-     const [user, setUser] = useState({
+     /*const [user, setUser] = useState({
      full_name: "Partner Tester",
      email: "partner@test.com",
      role: "partner"
     });
-  
-
+  */
+  const [user, setUser] = useState({
+  id: 1,
+  full_name: "Demo User",
+  email: "demo@test.com",
+  phone: "0123456789",
+  role: "customer",
+  token: "DEMO_TOKEN"
+  });
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}
