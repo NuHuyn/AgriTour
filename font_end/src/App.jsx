@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
-import Cart from './pages/Cart/Cart';
 import LoginPopup from './components/LoginPopup/LoginPopup';
 import Tour from './pages/Tour/Tour';
 import PartnerLayout from './pages/Partner/PartnerLayout';
@@ -17,10 +16,11 @@ import ManagePartners from './pages/Admin/ManagePartners';
 import TourDetail from './pages/Tour/TourDetail';
 import BookTourPage from './pages/Booking/BookTourPage';
 import ConfirmBookingPage from './pages/Booking/ConfirmBookingPage';
+import {CartProvider} from './context-store/CartContext';
 const AppContent = () => {
   const { user, setUser } = useAuth();
   const [showLogin, setShowLogin] = React.useState(false);
-
+  
   return (
     <>
       {showLogin && <LoginPopup setShowLogin={setShowLogin} setUser={setUser} />}
@@ -29,7 +29,6 @@ const AppContent = () => {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/tour" element={<Tour />} />
           <Route path="/tour-details/:id" element={<TourDetail />} />
           <Route path="/book-tour/:id" element={<BookTourPage />} />
@@ -53,7 +52,9 @@ const AppContent = () => {
 
 const App = () => (
   <AuthProvider>
-    <AppContent />
+    <CartProvider>
+      <AppContent />
+    </CartProvider>
   </AuthProvider>
 );
 

@@ -2,6 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { tour_full_sample_list } from "../../assets/tour_sample_full";
 import {parsePrice, formatPrice, calcPriceFromBase} from "../../components/Utils/priceUtils";
+import { useCart } from "../../context-store/CartContext";
+
+
 import './BookTourPage.css';
 const BookTourPage = () => {
    const { id } = useParams();
@@ -15,7 +18,8 @@ const BookTourPage = () => {
     visaFee: selectedTour.visa_fee ?? 690000, // fallback sample
     singleRoomFee: selectedTour.single_room_fee ?? 1600000,
   };
-
+  
+  const { addBookingToCart } = useCart();
   // --- form state ---
   const [qtyAdult, setQtyAdult] = useState(1);
   const [qtyChild, setQtyChild] = useState(0);
@@ -280,31 +284,41 @@ const BookTourPage = () => {
         </label>
       </div>
 
-      <button className="confirm-btn" onClick={() => {
+           <button
+  className="confirm-btn"
+  onClick={() => {
+    const bookingData = {
+      tempId: Date.now(), // ID tạm để phân biệt giữa các booking
+      tour: selectedTour,
+      customer: {
+        fullName,
+        email,
+        phone,
+        address,
+        notes
+      },
+      passengers: {
+        adults: qtyAdult,
+        children: qtyChild,
+        smallChildren: qtySmallChild,
+        infants: qtyInfant
+      },
+      paymentMethod,
+      totalAmount: grandTotal
+    };
+
+    // 👉 LƯU VÀO GIỎ HÀNG
+    addBookingToCart(bookingData);
+
+    // 👉 CHUYỂN ĐẾN CONFIRM PAGE
     navigate("/confirm-booking", {
-        state: {
-            tour: selectedTour,
-            customer: {
-                fullName,
-                email,
-                phone,
-                address,
-                notes
-            },
-            passengers: {
-                adults: qtyAdult,
-                children: qtyChild,
-                smallChildren: qtySmallChild,
-                infants: qtyInfant
-            },
-            paymentMethod,
-            totalAmount: grandTotal
-        }
+      state: bookingData
     });
-}}
+  }}
 >
-        COMPLETE BOOKING
-      </button>
+  COMPLETE BOOKING
+</button>
+
     </div>
   )
 }
