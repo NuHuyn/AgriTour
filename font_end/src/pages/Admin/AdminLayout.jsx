@@ -13,6 +13,7 @@ const AdminLayout = () => {
   if (!user || user.role !== 'admin') {
     return <Navigate to="/" replace />;
   }
+  
 
   return (
    <div className="admin-layout">

@@ -4,21 +4,27 @@ const tourController = require("../controllers/tourController");
 const multer = require("multer");
 const path = require("path");
 
-// 🔹 Cấu hình nơi lưu ảnh
+//  Cấu hình nơi lưu ảnh
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "..", "uploads", "tours"));
   },
   filename: function (req, file, cb) {
-    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9) + path.extname(file.originalname);
+    const uniqueName =
+      Date.now() +
+      "-" +
+      Math.round(Math.random() * 1e9) +
+      path.extname(file.originalname);
     cb(null, uniqueName);
-  }
+  },
 });
 
 const upload = multer({ storage });
 
-
 // === Public routes ===
+
+//  ĐƯA ROUTE NÀY LÊN TRÊN
+router.get("/admin/all", tourController.getAllToursForAdmin);
 
 // Lấy tất cả tour
 router.get("/", tourController.getAllTours);
@@ -27,10 +33,10 @@ router.get("/", tourController.getAllTours);
 router.get("/filter/by-region/:region_id", tourController.getToursByRegion);
 router.get("/filter/by-category/:category_id", tourController.getToursByCategory);
 
-// Lấy tour theo ID
+//  Route dạng /:tour_id PHẢI ĐỂ XUỐNG CUỐI
 router.get("/:tour_id", tourController.getTourById);
 
-// === Partner/Admin routes ===
+// === Partner/Admin actions ===
 
 // Tạo tour (partner hoặc admin)
 router.post("/", upload.single("image"), tourController.createTour);

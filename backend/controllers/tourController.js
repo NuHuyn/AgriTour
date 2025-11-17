@@ -131,3 +131,37 @@ exports.deleteTour = (req, res) => {
   });
 };
 
+// get all tours for admin 
+exports.getAllToursForAdmin = (req, res) => {
+  const sql = `
+    SELECT 
+      t.tour_id,
+      t.tour_name,
+      t.description,
+      t.location,
+      t.start_date,
+      t.end_date,
+      t.price,
+      t.available_slots,
+      t.status,
+      t.image_url,
+
+      u.full_name AS partner_name,
+      r.region_name,
+      c.category_name
+
+    FROM tours t
+    LEFT JOIN users u ON t.created_by = u.user_id
+    LEFT JOIN regions r ON t.region_id = r.region_id
+    LEFT JOIN categories c ON t.category_id = c.category_id
+    ORDER BY t.tour_id DESC
+  `;
+
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.error(" getAllToursForAdmin error:", err);
+      return res.status(500).json({ error: err });
+    }
+    res.json(rows);
+  });
+};

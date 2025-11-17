@@ -74,16 +74,18 @@ const PartnerDashboard = ({ user }) => {
       </div>
 
       <div className="dashboard-summary">
-        <div className="summary-card">
-          <h3>Number of Tours</h3>
+        <div className="summary-card summary-blue">
+          <h3>Total Tours</h3>
           <p>{tours.length}</p>
         </div>
-        <div className="summary-card">
-          <h3>Number of tours are pending</h3>
+
+        <div className="summary-card summary-orange">
+          <h3>Pending Approval</h3>
           <p>{tours.filter((t) => t.status === "pending").length}</p>
         </div>
-        <div className="summary-card">
-          <h3>Number of tours are approved by admin</h3>
+
+        <div className="summary-card summary-green">
+          <h3>Approved Tours</h3>
           <p>{tours.filter((t) => t.status === "approved").length}</p>
         </div>
       </div>
