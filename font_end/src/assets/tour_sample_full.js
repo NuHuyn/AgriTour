@@ -101,5 +101,110 @@ export const tour_full_sample_list = [
     }
 
     ]
-  }
+  },
+  {
+  id: 13,
+  tour_name: "Hue Heritage Discovery Tour",
+  tour_image: assets.river3,
+  location: "Hue City",
+  region: "Central",
+  price: "90$ per person",
+  start_date: "2026-04-10",
+  period: "4 days 3 nights",
+  available: true,
+  available_slots: 25,
+  partner_id: 105,
+  partner_name: "Trần Thị B",
+  category_id: 2,
+  status: "pending",
+
+  /* HIGHLIGHT INFO */
+  route: "Hue City – Imperial Citadel – Thien Mu Pagoda – Perfume River – Royal Tombs",
+  departure_dates:
+    "10, 17, 24/04 • 08, 15, 22/05 • 05, 12, 19/06 • 03, 10, 17/07/2026",
+  transport: "Tourist Bus & Domestic Flight",
+
+  /* DESCRIPTION */
+  long_description: `
+    This tour offers an immersive journey into the heart of Vietnam’s ancient capital—Hue.
+    Explore the majestic Imperial Citadel, cruise along the Perfume River, visit sacred pagodas,
+    and discover the royal tombs of the Nguyen Dynasty. Perfect for travelers who love culture,
+    architecture, and peaceful landscapes.
+  `,
+
+  tags: [
+    "Hue",
+    "Imperial City",
+    "Perfume River",
+    "Nguyen Dynasty",
+    "Heritage Tour",
+    "Central Vietnam",
+    "Cultural Journey"
+  ],
+
+  /* ITINERARY */
+  itinerary: [
+    {
+      day: "DAY 1 | Ho Chi Minh City – Hue – Imperial Citadel (Lunch, Dinner)",
+      content: [
+        "Meet at Tan Son Nhat Airport for a direct flight to Hue.",
+        "Arrival in Hue and enjoy lunch with local specialties.",
+        "Visit the Imperial Citadel—UNESCO World Heritage Site.",
+        "Explore the Noon Gate, Thai Hoa Palace, Forbidden Purple City.",
+        "Dinner and check-in at the hotel in Hue City."
+      ],
+      images: [
+        "https://statics.vinpearl.com/cam-nang-co-do-hue-01_1622786632.jpg",
+        "https://cdn3.ivivu.com/2018/07/hoang-thanh-hue-ivivu-2.jpg"
+      ]
+    },
+
+    {
+      day: "DAY 2 | Thien Mu Pagoda – Perfume River Cruise (Breakfast, Lunch, Dinner)",
+      content: [
+        "Breakfast at the hotel.",
+        "Visit the iconic Thien Mu Pagoda overlooking the Perfume River.",
+        "Take a relaxing boat cruise on the Perfume River.",
+        "Enjoy lunch at a local restaurant.",
+        "Visit Dong Ba Market to shop for local products.",
+        "Dinner and free time to explore Hue by night."
+      ],
+      images: [
+        "https://ik.imagekit.io/tvlk/blog/2022/09/chua-thien-mu-1.jpg",
+        "https://ik.imagekit.io/tvlk/blog/2023/03/song-huong-1.jpg"
+      ]
+    },
+
+    {
+      day: "DAY 3 | Royal Tombs Tour – Minh Mang – Khai Dinh (Breakfast, Lunch, Dinner)",
+      content: [
+        "Breakfast at hotel.",
+        "Visit Minh Mang Tomb, known for its majestic architecture and poetic scenery.",
+        "Explore Khai Dinh Tomb—the most unique and artistic among the Nguyen Tombs.",
+        "Lunch with authentic Hue royal cuisine.",
+        "Afternoon: Visit Hue Museum of Royal Antiquities.",
+        "Dinner and return to hotel."
+      ],
+      images: [
+        "https://vcdn1-dulich.vnecdn.net/2022/09/19/lang-khai-dinh-1-1663570687.jpg",
+        "https://ik.imagekit.io/tvlk/blog/2022/09/lang-minh-mang-2.jpg"
+      ]
+    },
+
+    {
+      day: "DAY 4 | Free time – Flight to Ho Chi Minh City (Breakfast)",
+      content: [
+        "Breakfast at hotel.",
+        "Free time for shopping or relaxing.",
+        "Check-out and transfer to Phu Bai Airport.",
+        "Flight back to Ho Chi Minh City.",
+        "End of tour."
+      ],
+      images: [
+        "https://ik.imagekit.io/tvlk/blog/2022/09/hue-1.jpg"
+      ]
+    }
+  ]
+}
+
 ];

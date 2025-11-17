@@ -3,7 +3,8 @@ import './Navbar.css'
 import { assets } from '../../assets/assets'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-
+import { useCart } from '../../context-store/CartContext';
+import Cart from '../../pages/Cart/Cart';
 
 const Navbar = ({ setShowLogin, user, setUser }) => {
   const [menu, setMenu] = useState("home");
@@ -14,8 +15,16 @@ const Navbar = ({ setShowLogin, user, setUser }) => {
     setShowMenu(false);
     alert("You have logged out successfully");
   };
+  
+   const [showCart, setShowCart] = useState(false);
+   const { pendingBookings } = useCart();
+
+
 
   return (
+    <>
+    {showCart && <Cart onClose={() => setShowCart(false)} />}
+
     <div className='navbar'>
       <Link to='/'><img src={assets.logo_agritour} alt="" className="logo"/></Link>
       <ul className="navbar-menu">
@@ -30,10 +39,15 @@ const Navbar = ({ setShowLogin, user, setUser }) => {
       </ul>
       <div className="navbar-right">
         <img src={assets.search_icon} alt="" className ="search-icon-logo" />
-        <div className="navbar-search-icon">
-             <Link to='/cart'><img src={assets.basket_icon} alt="" className="basket-icon" /></Link>
-             <div className="dot"></div>
+        <div className="navbar-search-icon" onClick={() => setShowCart(true)}>
+         <img src={assets.basket_icon} alt="" className="basket-icon" />
+
+           {pendingBookings.length > 0 && (
+             <span className="cart-badge">{pendingBookings.length}</span>
+           )}
+           <div className="dot"></div>
         </div>
+
          {/* ✅ Nếu có user thì hiện avatar + tên */}
         {user ? (
           <div className="navbar-user-info">
@@ -94,7 +108,9 @@ const Navbar = ({ setShowLogin, user, setUser }) => {
           <button onClick={() => setShowLogin(true)}>Sign in</button>
         )}
       </div>
+      
     </div>
+  </>
   )
 }
 

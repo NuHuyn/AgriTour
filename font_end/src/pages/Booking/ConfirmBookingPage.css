@@ -1,0 +1,141 @@
+.confirm-container {
+  width: 100%;
+  max-width: 2000px;
+  margin: auto;
+  padding: 40px 20px;
+  font-family: "Inter", sans-serif;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f3b1f;
+  margin-bottom: 20px;
+}
+/* ======= TOUR INFO LAYOUT ======= */
+.tour-confirm-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  width: 100%;
+}
+
+/* LEFT IMAGE */
+.tour-img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* RIGHT TABLE */
+.tour-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 17px;
+  background: #ffffff;
+}
+
+.tour-info-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.tour-info-table .label {
+  font-weight: 700;
+  width: 35%;
+  background: #f9f9f9;
+  border-right: 1px solid #e8e8e8;
+}
+
+.tour-info-table tr:last-child td {
+  border-bottom: none;
+}
+
+
+.confirm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.confirm-table td, 
+.confirm-table th {
+  border: 1px solid #e4e4e4;
+  padding: 14px;
+  font-size: 15px;
+}
+
+.confirm-table th {
+  background: #f7f7f7;
+  font-weight: 700;
+}
+
+.payment-method {
+  font-size: 18px;
+  margin: 12px 0;
+}
+
+.total-price {
+  font-size: 26px;
+  color: #c4006b;
+  font-weight: 700;
+}
+
+
+
+/* --- GO BACK button (small & clean) --- */
+
+
+
+.back-btn:hover {
+  background: #d5d5d5;
+}
+
+/* --- CONFIRM & PAY (big but NOT full screen) --- */
+.confirm-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  gap: 20px;
+  padding: 0 10px;
+}
+
+.back-btn {
+  padding: 14px 28px;
+  min-width: 140px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirm-btn {
+  flex: 1;                  /* 🔥 Quan trọng: full chiều ngang còn lại */
+  padding: 14px 0;
+  background: #234423;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+
+
+.confirm-btn:hover {
+  background: #264d30;
+}
