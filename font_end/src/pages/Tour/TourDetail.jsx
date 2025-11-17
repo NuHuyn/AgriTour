@@ -1,5 +1,6 @@
 import React,{useState,useContext} from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { tour, list_tour_1, list_tour_2 } from "../../assets/assets";
 import { tour_full_sample_list } from "../../assets/tour_sample_full";
 import { useAuth } from "../../context-store/AuthContext";
@@ -15,7 +16,7 @@ const TourDetail = () => {
 
 
   const { id } = useParams();
-
+  const navigate = useNavigate();
   // gom tất cả tour lại để tìm theo id
   const allTours = [
   ...tour,
@@ -35,14 +36,12 @@ const selectedTour =
   }
    
  const handleBookClick = () => {
-  if (!user) {
-    // ❌ Chưa login → bật popup login
+   if (!user) {
     setShowLogin(true);
-  } else {
-    // ✔ Đã login → mở popup booking
-    setShowBooking(true);
-  }
-};
+   } else {
+    navigate(`/book-tour/${selectedTour.id}`);
+   }
+  };
 
 
 

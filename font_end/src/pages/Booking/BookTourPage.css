@@ -1,0 +1,249 @@
+/* ===== HEADER WRAPPER ===== */
+.tour-header-wrapper {
+  display: flex;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  gap: 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+}
+
+/* ===== LEFT IMAGE ===== */
+.tour-header-image img {
+  width: 600px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+/* ===== RIGHT INFO ===== */
+.tour-header-info {
+  flex: 1;
+}
+
+.tour-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: rgb(21, 55, 21);
+  line-height: 1.3;
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-grid p {
+  font-size: 18px;
+  color: #333;
+}
+
+.info-grid span {
+  font-weight: 700;
+  color: #000;
+  margin-right: 8px;
+}
+
+/* ===========================
+   SECTION TITLES
+=========================== */
+.section-title,
+.form-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  color: rgb(21, 55, 21);
+}
+
+.form-title i {
+  margin-right: 10px;
+  color: #1a5d1a;
+}
+
+/* ===========================
+   TABLE: PRICE
+=========================== */
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.price-table th {
+  background: linear-gradient(#c8e5a9, #b5d395);
+  padding: 14px;
+  border: 1px solid #ccc;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.price-table td {
+  padding: 14px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.price-table tbody td:first-child {
+  font-weight: 600;
+  text-align: left;
+  background: #fafafa;
+  padding-left: 20px;
+}
+
+.price-table tbody tr:hover {
+  background: #f3f8ff;
+}
+
+/* ===========================
+    FORM LAYOUT
+=========================== */
+.form-row {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+}
+
+.form-group.full-width {
+  width: 100%;
+}
+
+/* Labels */
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222;
+  font-size: 15px;
+}
+
+/* Inputs */
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.form-group textarea {
+  resize: none;
+  height: 70px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #1a5d1a;
+  box-shadow: 0 0 5px rgba(26, 93, 26, 0.4);
+}
+
+/* ===========================
+    EXTRA FEES (VISA / ROOM)
+=========================== */
+.extra-section {
+  margin-top: 40px;
+}
+
+.extra-section .form-row {
+  margin-top: 20px;
+}
+
+/* ===========================
+   TOTAL PRICE BOX
+=========================== */
+.total-section {
+  margin-top: 35px;
+  text-align: right;
+  font-size: 22px;
+  font-weight: 600;
+  color: #444;
+}
+
+.total-price {
+  color: #d6006a;
+  font-size: 26px;
+  margin-left: 8px;
+}
+
+/* ===========================
+    PAYMENT METHODS
+=========================== */
+.payment-options {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  background: #efffdf;
+  border: 1px solid #ddd;
+}
+
+.payment-item {
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.payment-item input {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+/* ===========================
+   CONFIRM BUTTON
+=========================== */
+.confirm-btn {
+  margin-top: 45px;
+  width: 100%;
+  padding: 16px;
+  background-color: #1a5d1a;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.confirm-btn:hover {
+  background: #145014;
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 900px) {
+  .book-tour-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .book-tour-header img {
+    width: 100%;
+    height: auto;
+  }
+
+  .form-group {
+    min-width: 100%;
+  }
+}
