@@ -1,52 +1,58 @@
 import React from "react";
 import "./Cart.css";
 import { useCart } from "../../context-store/CartContext";
-import { useNavigate } from "react-router-dom";
 import { formatPrice } from "../../components/Utils/priceUtils";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ onClose }) => {
+  const { pendingBookings, removeBooking } = useCart();
   const navigate = useNavigate();
-  const { pendingBookings } = useCart();
- 
+
   return (
-    <div className="cart-popup">
-      <div className="cart-box">
-        <h2>Pending Bookings</h2>
+    <div className="cart-dropdown-container" onClick={onClose}>
+      <div className="cart-dropdown" onClick={(e) => e.stopPropagation()}>
+        
+        <h3 className="cart-title">Pending Bookings</h3>
 
-        {pendingBookings.length === 0 ? (
-          <p>No pending booking.</p>
-        ) : (
-          pendingBookings.map((b) => (
-            <div
-              key={b.tempId}
-              className="cart-item"
-              onClick={() => navigate("/confirm-booking", { state: b })}
-            >
-              <img src={b.tour.tour_image} alt="" />
+        <div className="cart-items">
+          {pendingBookings.length === 0 ? (
+            <p className="empty-text">No pending bookings.</p>
+          ) : (
+            pendingBookings.map((b) => (
+              <div key={b.tempId} className="cart-item">
+                
+                <img src={b.tour.tour_image} alt="" className="cart-img" />
 
-              <div className="cart-item-info">
-                <h4>{b.tour.tour_name}</h4>
+                <div className="cart-info">
+                  <h4>{b.tour.tour_name}</h4>
+                  <p>{b.passengers.adults + b.passengers.children} passengers</p>
+                  <p className="price">{formatPrice(b.totalAmount)}</p>
+                </div>
 
-                <p>
-                  {b.passengers.adults +
-                    b.passengers.children +
-                    b.passengers.smallChildren +
-                    b.passengers.infants}{" "}
-                  people
-                </p>
+                <button
+                  className="view-btn"
+                  onClick={() => {
+                    navigate("/confirm-booking", { state: b });
+                    onClose();
+                  }}
+                >
+                  View
+                </button>
 
-                <p>Total: {formatPrice(b.totalAmount)}</p>
+                <button
+                  className="delete-btn"
+                  onClick={() => removeBooking(b.tempId)}
+                >
+                  ✕
+                </button>
               </div>
-            </div>
-          ))
-        )}
+            ))
+          )}
+        </div>
 
-        <button className="close-btn" onClick={onClose}>
-          Close
-        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
