@@ -1,17 +1,46 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ConfirmBookingPage.css";
+import { useUserTours } from "../../context-store/UserToursContext";
+import { useCart } from "../../context-store/CartContext";
 const ConfirmBookingPage = () => {
  const { state } = useLocation();
-  const navigate = useNavigate();
+ const navigate = useNavigate();
 
   if (!state) {
     return <h2 style={{ padding: 40 }}>No booking data found.</h2>;
   }
 
-  const { tour, customer, passengers, paymentMethod, totalAmount } = state;
+ const { tempId, tour, customer, passengers, paymentMethod, totalAmount } = state;
+ const { removeBooking } = useCart();
+ const { addUpcomingTour } = useUserTours();
+ const handleConfirmPay = () => {
 
-  return (
+  // 1. Xóa giỏ hàng bằng tempId
+  if (tempId) {
+    removeBooking(tempId);
+  }
+
+  // 2. Thêm vào upcoming tours
+  addUpcomingTour({
+    id: tour.id,
+    tour,
+    passengers,
+    customer,
+    totalAmount,
+    startDate: tour.start_date,
+    passengerCount:
+      passengers.adults +
+      passengers.children +
+      passengers.smallChildren +
+      passengers.infants,
+  });
+
+  alert("Payment confirmed!");
+  navigate("/user/panel");
+};
+
+ return (
     <div className="confirm-container">
 
       {/* ================= TOUR INFORMATION ================= */}
@@ -137,13 +166,7 @@ const ConfirmBookingPage = () => {
           Go Back
         </button>
 
-        <button
-          className="confirm-btn"
-          onClick={() => {
-            alert("Payment confirmed! Tour successfully booked 🎉");
-            navigate("/");
-          }}
-        >
+        <button className="confirm-btn" onClick={handleConfirmPay}>
           Confirm & Pay
         </button>
       </div>

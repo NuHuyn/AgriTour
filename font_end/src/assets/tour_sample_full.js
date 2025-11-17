@@ -154,8 +154,8 @@ export const tour_full_sample_list = [
         "Dinner and check-in at the hotel in Hue City."
       ],
       images: [
-        "https://statics.vinpearl.com/cam-nang-co-do-hue-01_1622786632.jpg",
-        "https://cdn3.ivivu.com/2018/07/hoang-thanh-hue-ivivu-2.jpg"
+        "https://th.bing.com/th/id/R.dbf244e6296c1c50c1c417159b1446a6?rik=OQTlLFS4ICmNgA&pid=ImgRaw&r=0",
+        "https://tse1.mm.bing.net/th/id/OIP.FeCyWpr4vI2YGxMIhfYEdQHaEx?w=620&h=400&rs=1&pid=ImgDetMain&o=7&rm=3"
       ]
     },
 
@@ -170,8 +170,8 @@ export const tour_full_sample_list = [
         "Dinner and free time to explore Hue by night."
       ],
       images: [
-        "https://ik.imagekit.io/tvlk/blog/2022/09/chua-thien-mu-1.jpg",
-        "https://ik.imagekit.io/tvlk/blog/2023/03/song-huong-1.jpg"
+        "https://cdn.britannica.com/23/185223-050-71EBC6C2/Thien-Mu-pagoda-Huong-River-Vietnam-Hue.jpg",
+        "https://bazantravel.com/cdn/medias/uploads/72/72355-chua-thien-mu-hue-700x474.jpg"
       ]
     },
 
@@ -186,8 +186,8 @@ export const tour_full_sample_list = [
         "Dinner and return to hotel."
       ],
       images: [
-        "https://vcdn1-dulich.vnecdn.net/2022/09/19/lang-khai-dinh-1-1663570687.jpg",
-        "https://ik.imagekit.io/tvlk/blog/2022/09/lang-minh-mang-2.jpg"
+        "https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/9240eafa-3945-4bc2-a3be-7dc90b260ff5.jpeg",
+        "https://tse3.mm.bing.net/th/id/OIP.8y9j6E8Or3eicJ5Z2k7Q-gHaE8?rs=1&pid=ImgDetMain&o=7&rm=3"
       ]
     },
 
@@ -201,7 +201,7 @@ export const tour_full_sample_list = [
         "End of tour."
       ],
       images: [
-        "https://ik.imagekit.io/tvlk/blog/2022/09/hue-1.jpg"
+        "https://mia.vn/media/uploads/blog-du-lich/check-in-ninh-binh-voi-net-dep-ngot-ngao-nhu-tranh-ve-6-1666722930.jpg"
       ]
     }
   ]

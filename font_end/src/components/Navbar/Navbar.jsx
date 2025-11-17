@@ -85,23 +85,36 @@ const Navbar = ({ setShowLogin, user, setUser }) => {
              
             </div>
 
-            {showMenu && (
-              <div className="user-dropdown">
-                     
-                  
-                 {user.role === 'admin' && (
-                   <p onClick={() => navigate('/admin/dashboard')}>Admin Panel</p>
-                 )}
-                 
-                 {user.role === 'partner' && (
-                  <p onClick={() => navigate('/partner/dashboard')}>
-                    Partner Panel
-                  </p>
-                 )}
-                 <p onClick={() => alert(`User: ${user.full_name}`)}>Personal information</p>
-                 <p onClick={handleLogout}>Log out</p>
-              </div>
+        {showMenu && (
+          <div className="user-dropdown">
+
+            {/* 🔹 USER PANEL — dành cho mọi user */}
+              <p onClick={() => navigate('/user/panel')}>
+                User Panel
+              </p>
+
+            {/* 🔹 ADMIN PANEL */}
+              {user.role === 'admin' && (
+                <p onClick={() => navigate('/admin/dashboard')}>Admin Panel</p>
             )}
+
+             {/* 🔹 PARTNER PANEL */}
+            {user.role === 'partner' && (
+                <p onClick={() => navigate('/partner/dashboard')}>
+                  Partner Panel
+                </p>
+            )}
+
+             {/* 🔹 PERSONAL INFO */}
+                <p onClick={() => alert(`User: ${user.full_name}`)}>
+                  Personal information
+                </p>
+
+              {/* 🔹 LOGOUT */}
+                <p onClick={handleLogout}>Log out</p>
+          </div>
+        )}
+
 
           </div>
         ) : (
