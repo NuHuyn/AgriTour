@@ -1,6 +1,19 @@
 
 import search_icon from './search-icon.png';
 import basket_icon from './basket.png';
+import mastercard from './mastercard_transparent.png';
+import momo from './momo.png';
+import shoppee_pay from './shoppypay.webp';
+import visa from './visa-card.jpg';
+import vnpay from './vnpay.png';
+import zalopay from './zalopay.webp';
+import appstore from './appstore.png';
+import qr from './qr.png';
+import dmca from './dmca.png';
+import certification from './BoCongThuong.webp';
+import ggstore from './playstore.png';
+import qr1 from './qr1.png';
+import qr2 from './qr2.png';
 import cross_icon from './cross-icon.png';
 import central_vietnam from './central-vietnam.jpg';
 import daklak from './daklak.webp';
@@ -41,6 +54,19 @@ export const assets = {
   user_icon,
   search_icon,
   basket_icon,
+  mastercard,
+  momo,
+  shoppee_pay,
+  visa,
+  vnpay,
+  zalopay,
+  appstore,
+  qr,
+  dmca,
+  certification,
+  ggstore,
+  qr1,
+  qr2,
   cross_icon,
   central_vietnam,
   daklak,

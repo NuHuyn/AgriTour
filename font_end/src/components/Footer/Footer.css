@@ -1,0 +1,145 @@
+/* ===========================
+   FOOTER WRAPPER
+=========================== */
+.footer-wrapper {
+  background: #c8f9c9;
+  padding: 50px 70px;
+  color: #10452d;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===========================
+   TOP GRID – 5 COLUMNS
+=========================== */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+.footer-grid h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.footer-grid li,
+.footer-grid p {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.footer-grid li:hover {
+  color: #1a73e8;
+  cursor: pointer;
+}
+
+/* SOCIAL ICONS */
+.footer-socials i {
+  font-size: 20px;
+  margin-right: 12px;
+  margin-top: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-socials i:hover {
+  color: #0a66c2;
+}
+
+/* ===========================
+   COPYRIGHT
+=========================== */
+.footer-copy {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-top: 40px;
+}
+
+
+/* FOOTER MIDDLE: 3 COLUMNS */
+.footer-middle {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1fr;
+  gap: 60px;
+  margin-top: 40px;
+  align-items: start;
+}
+
+/* TITLE */
+.footer-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #003366;
+}
+
+/* COLUMN BOX */
+.footer-col-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================
+   MOBILE APP (GRID 2×2)
+========================== */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1.3fr);
+  gap: 25px 20px;
+}
+
+.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 260px; 
+  gap: 20px;
+}
+
+.footer-app-1 {
+  width: 160px;
+}
+.footer-app-2{
+  width:150px;
+}
+
+.footer-qr {
+  width: 150px;
+  border-radius: 6px;
+}
+
+/* ==========================
+   CERTIFICATIONS (1 COLUMN)
+========================== */
+.cert-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.cert-logo-1 {
+  width: 220px;
+}
+.cert-logo-2{
+  width:160px;
+}
+
+/* ==========================
+   PAYMENT METHODS (GRID)
+========================== */
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 30px 30px;
+  justify-content: center;
+}
+
+.payment-grid img {
+  height: 38px;
+  object-fit: contain;
+}

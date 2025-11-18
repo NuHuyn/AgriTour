@@ -50,7 +50,7 @@ const news_data = [
   {
     id: 7,
     title: "Vietnam, U.S. push forward trade talks, agricultural imports",
-    img: "https://image.vietnamnews.vn/uploadvnnews/Article/2025/11/12/464017_5322001664781249_image.png",
+    img: "https://huyenthiencac.vn/wp-content/uploads/2022/09/Hoa-Thien-Dai-Huu-Kham-Thu-Mo-Tuoc.jpg",
     source: "People's Army Newspaper Online",
     date: "18/11/2025",
     url: "https://en.qdnd.vn/economy/international-cooperation/vietnam-u-s-push-forward-trade-talks-agricultural-imports-584745",

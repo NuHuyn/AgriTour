@@ -22,6 +22,7 @@ import { UserToursProvider } from './context-store/UserToursContext';
 import TourInfoPage from './pages/User/TourInfoPage';
 import News from './pages/News/News';
 import Contact from './pages/Contact/Contact';
+import Footer from './components/Footer/Footer';
 const AppContent = () => {
   const { user, setUser } = useAuth();
   const [showLogin, setShowLogin] = React.useState(false);
@@ -31,7 +32,7 @@ const AppContent = () => {
       {showLogin && <LoginPopup setShowLogin={setShowLogin} setUser={setUser} />}
       <div className="app">
         <Navbar setShowLogin={setShowLogin} user={user} setUser={setUser} />
-
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tour" element={<Tour />} />
@@ -54,6 +55,7 @@ const AppContent = () => {
           </Route>
 
         </Routes>
+        <Footer />
       </div>
     </>
   );
