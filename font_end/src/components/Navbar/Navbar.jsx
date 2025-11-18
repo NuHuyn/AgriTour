@@ -47,7 +47,16 @@ const Navbar = ({ setShowLogin, user, setUser }) => {
           News
         </li>
 
-        <li onClick={()=>setMenu("contact-us")} className={menu==="contact-us"?"active":""}>Contact-us</li>
+        <li
+           onClick={() => {
+             setMenu("contact");
+             navigate("/contact");
+           }}
+           className={menu === "contact" ? "active" : ""}
+        >
+           Contact
+        </li>
+
       </ul>
       <div className="navbar-right">
          <img 
