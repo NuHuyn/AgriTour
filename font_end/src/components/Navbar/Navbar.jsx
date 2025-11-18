@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context-store/CartContext';
 import Cart from '../../pages/Cart/Cart';
+import SearchModal from '../SearchModal/SearchModal';
 
 const Navbar = ({ setShowLogin, user, setUser }) => {
   const [menu, setMenu] = useState("home");
   const [showMenu, setShowMenu] = useState(false); // 🔹 hiển thị menu khi clicke
   const navigate = useNavigate();
+  const [showSearch, setShowSearch] = useState(false);
   const handleLogout = () => {
     setUser(null);
     setShowMenu(false);
@@ -24,6 +26,7 @@ const Navbar = ({ setShowLogin, user, setUser }) => {
   return (
     <>
     {showCart && <Cart onClose={() => setShowCart(false)} />}
+    {showSearch && <SearchModal onClose={() => setShowSearch(false)} />}
 
     <div className='navbar'>
       <Link to='/'><img src={assets.logo_agritour} alt="" className="logo"/></Link>
@@ -34,11 +37,27 @@ const Navbar = ({ setShowLogin, user, setUser }) => {
         <li className={menu === "tour" ? "active" : ""}>
           <Link to="/tour" onClick={() => setMenu("tour")}>Tour</Link>
         </li>
-        <li onClick={()=>setMenu("information")} className={menu==="information"?"active":""}>Information</li>
+        <li
+          onClick={() => {
+            setMenu("news");
+            navigate("/news");
+           }}
+           className={menu === "news" ? "active" : ""}
+        >
+          News
+        </li>
+
         <li onClick={()=>setMenu("contact-us")} className={menu==="contact-us"?"active":""}>Contact-us</li>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="" className ="search-icon-logo" />
+         <img 
+           src={assets.search_icon} 
+           alt="" 
+           className="search-icon-logo" 
+           onClick={() => setShowSearch(true)}
+           style={{ cursor: "pointer" }}
+         />
+
         <div className="navbar-search-icon" onClick={() => setShowCart(true)}>
          <img src={assets.basket_icon} alt="" className="basket-icon" />
 
