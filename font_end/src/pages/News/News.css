@@ -1,0 +1,120 @@
+/* Page container */
+.news-page {
+  padding: 30px 30px;
+  max-width: 2000px;
+  margin: 0 auto;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Banner */
+.news-banner {
+  background: url("https://1.bp.blogspot.com/-u_n9r84ZO0Q/YOuApXBuRzI/AAAAAAAAEh0/-qgPF2CvDvkqUAns-Mdz-vm_ERpUP5EHgCLcBGAsYHQ/w1200-h630-p-k-no-nu/Nam%2BCang%2B1.jpg") center/cover no-repeat;
+  border-radius: 12px;
+  color: #fff;
+  padding: 100px 24px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.news-banner-inner h1 {
+  font-size: 50px;
+  margin: 0 0 8px 0;
+  color: #fff;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.35);
+}
+.news-banner-inner .sub {
+  color: rgba(255,255,255,0.9);
+  margin: 0;
+}
+
+/* Controls */
+.news-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: 22px 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.search-group {
+  flex: 1 1 420px;
+}
+
+.news-search {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #d7e2d2;
+  font-size: 14px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 14px;
+  color: #2f5b35;
+  font-weight: 600;
+}
+
+.news-select {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid #d7e2d2;
+}
+
+/* Grid */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 8px;
+}
+
+/* responsive */
+@media (max-width: 992px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .news-page {
+    padding: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+  .news-controls { flex-direction: column; align-items: stretch; }
+}
+
+/* Footer controls */
+.news-footer {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-load-more, .btn-reset {
+  background: #2f6e3a;
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-reset {
+  background: #7a9b72;
+}
+.no-result {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #666;
+}

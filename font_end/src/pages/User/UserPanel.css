@@ -1,0 +1,67 @@
+/* --- Container --- */
+.userpanel-container {
+  width: 100%;
+  max-width: 2100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Inter", sans-serif;
+}
+
+/* --- Title --- */
+.userpanel-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #193b24;
+  margin-bottom: 25px;
+}
+
+/* --- Tabs Wrapper --- */
+.userpanel-tabs {
+  display: flex;
+  gap: 14px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 12px;
+  margin-bottom: 30px;
+}
+
+/* --- Each Tab Button --- */
+.tab-btn {
+  padding: 10px 22px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s;
+  color: #333;
+}
+
+.tab-btn:hover {
+  background: #eaeaea;
+}
+
+/* --- Active Tab (Shopee style) --- */
+.tab-btn.active {
+  background: #193b24;
+  color: white;
+  border-color: #193b24;
+  font-weight: 600;
+  transform: translateY(-2px);
+}
+
+/* --- Content Box --- */
+.userpanel-content {
+  margin-top: 10px;
+}
+
+.panel-box {
+  background: white;
+  padding: 25px;
+  font-size: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  color: #444;
+}

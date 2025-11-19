@@ -17,6 +17,11 @@ import TourDetail from './pages/Tour/TourDetail';
 import BookTourPage from './pages/Booking/BookTourPage';
 import ConfirmBookingPage from './pages/Booking/ConfirmBookingPage';
 import {CartProvider} from './context-store/CartContext';
+import UserPanel from './pages/User/UserPanel';
+import { UserToursProvider } from './context-store/UserToursContext';
+import TourInfoPage from './pages/User/TourInfoPage';
+import News from './pages/News/News';
+
 const AppContent = () => {
   const { user, setUser } = useAuth();
   const [showLogin, setShowLogin] = React.useState(false);
@@ -34,6 +39,9 @@ const AppContent = () => {
           <Route path="/book-tour/:id" element={<BookTourPage />} />
           <Route path="/partner/*" element={<PartnerLayout user={user} />} />
           <Route path="/confirm-booking" element={<ConfirmBookingPage />} />
+          <Route path="/user/panel" element={<UserPanel />} />
+          <Route path="/tour-info" element={<TourInfoPage />} />
+          <Route path="/news" element={<News />} />
           <Route path="/admin" element={<AdminLayout />}>
              <Route index element={<Dashboard />} /> {/* khi vào /admin tự vào dashboard */}
              <Route path="dashboard" element={<Dashboard />} />
@@ -52,9 +60,11 @@ const AppContent = () => {
 
 const App = () => (
   <AuthProvider>
-    <CartProvider>
-      <AppContent />
-    </CartProvider>
+    <UserToursProvider>
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
+    </UserToursProvider>
   </AuthProvider>
 );
 
