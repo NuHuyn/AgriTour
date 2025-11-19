@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './loginPopup.css';
-import { assets } from '../../assets/assets';
-
-
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./loginPopup.css";
+import { assets } from "../../assets/assets";
 
 const LoginPopup = ({ setShowLogin, setUser }) => {
   const [currState, setCurrState] = useState("Login");
@@ -12,11 +9,10 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
     full_name: "",
     email: "",
     password: "",
-    phone: ""
+    phone: "",
   });
-   
 
-  const navigate = useNavigate(); // dung de chuyen trang
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,10 +21,6 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    /*console.log("Submitting tour, current user:", user); // 👈 kiểm tra
-    if (!user) return alert("Vui lòng đăng nhập trước!");
-    if (!user.token) return alert("User chưa có token. Vui lòng login lại!");
-    */
     const url =
       currState === "Login"
         ? "http://localhost:8081/api/auth/login"
@@ -52,31 +44,32 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
       });
 
       const data = await res.json();
+
       if (!res.ok) {
         alert(data.message || "Something went wrong");
+        return;
+      }
+
+      alert(data.message);
+
+      /** 🔥 LƯU USER VÀO LOCAL STORAGE */
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      /** 🔥 LƯU LÊN CONTEXT (App.jsx) */
+      setUser(data.user);
+
+      setShowLogin(false);
+
+      /** 🔥 Điều hướng theo role */
+      if (data.user.role === "partner") {
+        navigate("/partner/dashboard");
+      } else if (data.user.role === "admin") {
+        navigate("/admin/dashboard");
       } else {
-        alert(data.message);
-        console.log("User data:", data.user);
-
-        // save user + token to App.jsx
-        setUser({
-          ...data.user,
-          token: data.token
-         }); // Cập nhật thông tin user lên App.jsx
-        setShowLogin(false);
-
-        // Chuyển hướng sau khi đăng nhập/đăng ký thành công
-        // Điều hướng theo role
-        if (data.user.role === "partner") {
-          navigate("/partner/dashboard");
-        } else if (data.user.role === "admin") {
-          navigate("/admin/dashboard");
-        } else {
-          navigate("/"); // customer hoặc guest quay về trang chủ
-        }
+        navigate("/");
       }
     } catch (err) {
-      console.error("Error:", err);
+      console.error("Login error:", err);
       alert("Server error");
     }
   };
@@ -118,6 +111,7 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
             onChange={handleChange}
             required
           />
+
           {currState !== "Login" && (
             <input
               type="text"

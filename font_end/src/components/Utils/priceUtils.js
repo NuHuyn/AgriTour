@@ -1,4 +1,10 @@
 export function parsePrice(priceString) {
+  if (priceString == null) return 0;
+
+  // Nếu là số → trả lại luôn
+  if (typeof priceString === "number") return priceString;
+
+  // Nếu là string → xử lý
   return Number(priceString.replace(/[^\d]/g, ""));
 }
 

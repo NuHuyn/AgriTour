@@ -1,122 +1,168 @@
-import React, { useContext, useRef, useEffect } from 'react';
-import './Tour.css';
-import { list_tour_1, list_tour_2, tour } from '../../assets/assets';
-import RegionSelector from '../../components/region/RegionSelector';
-import { StoreContext } from '../../context-store/StoreContext';
-import { Link } from 'react-router-dom';
-import TourDetail from './TourDetail';
+
+import React, { useContext, useEffect, useState, useRef } from "react";
+import "./Tour.css";
+import RegionSelector from "../../components/region/RegionSelector";
+import { StoreContext } from "../../context-store/StoreContext";
+import { Link } from "react-router-dom";
+
 const Tour = () => {
   const { region } = useContext(StoreContext);
   const regionSectionRef = useRef(null);
-  
-  // ✅ Lọc theo region (nếu chọn All thì không hiện)
-  const showRegionTours = region !== 'All';
+  const [dbTours, setDbTours] = useState([]);
 
-  const regionToursMain = tour.filter(tour => tour.region === region);
-  const regionTours1 = list_tour_1.filter(tour => tour.region === region);
-  const regionTours2 = list_tour_2.filter(tour => tour.region === region);
-  const allRegionTours = [...regionToursMain, ...regionTours1, ...regionTours2];
+  // Map region_id → region name
+  const regionMapDB = {
+    1: "North",
+    2: "Central",
+    3: "South"
+  };
+
+  // TÍNH SỐ NGÀY
+  const calcPeriod = (s, e) => {
+    if (!s || !e) return "Updating...";
+    const start = new Date(s);
+    const end = new Date(e);
+    return Math.ceil((end - start) / (1000 * 3600 * 24)) + " days";
+  };
+  const formatDate = (dateStr) => {
+  if (!dateStr) return "Updating...";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-GB");  // 25/11/2025
+};
+
+  // Chuẩn hóa tour từ DB
+  const normalizeTour = (t) => ({
+    id: t.tour_id,
+    tour_name: t.tour_name,
+    image_url: t.image_url ? `http://localhost:8081${t.image_url}` : null,
+    start_date: formatDate(t.start_date),
+    end_date: formatDate(t.end_date),
+    period: calcPeriod(t.start_date, t.end_date),
+    price: t.price,
+    region_name: regionMapDB[t.region_id], // ⭐ GIẢI QUYẾT LỖI LỌC REGION
+    available_slots: t.available_slots
+  });
+
+  // Lấy tour backend
   useEffect(() => {
-  if (region !== 'All' && regionSectionRef.current) {
-    regionSectionRef.current.scrollIntoView({ behavior: 'smooth' });
-   }
-  }, [region]);
+    fetch("http://localhost:8081/api/tours")
+      .then((res) => res.json())
+      .then((data) => {
+        const approved = data.filter(
+          (t) => t.status?.toLowerCase() === "approved"
+        );
+        setDbTours(approved.map(normalizeTour));
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
+  // ⭐ HOT Tours = 4 tour đầu tiên
+  const hotTours = dbTours.slice(0, 4);
+
+  // ⭐ Education Tours = region CENTRAL
+  const eduTours = dbTours.filter((t) => t.region_name === "Central");
+
+  // ⭐ Lọc theo region người dùng chọn
+  const filteredRegionTours =
+    region === "All"
+      ? []
+      : dbTours.filter((t) => t.region_name === region);
+
+  // Scroll khi đổi region
+  useEffect(() => {
+    if (region !== "All" && regionSectionRef.current) {
+      regionSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [region]);
 
   return (
     <>
-      <div className='explore-tour' id='explore-tour'>
+      <div className="explore-tour">
         <h1>Explore Tour</h1>
-        <p className="explore-welcome">
-         Welcome to AgriTour where is your gateway to Vietnam’s most authentic and breathtaking landscapes.  
-  From the misty mountains of the North, the cultural heartlands of the Central region  
-  to the peaceful rivers and vibrant fields of the South, every journey carries its own charm.  
-  Choose your region and begin an unforgettable adventure crafted just for you.
-        </p>
 
-        {/* ✅ Chọn vùng */}
         <RegionSelector />
 
-        
-        {/* ✅ Phần tour mặc định */}
+        {/* HOT TOURS */}
         <h2>Tour hot in all season !!!</h2>
-        <p className='explore-tour-description'>
-          Discover the beauty and diversity of Vietnam through our carefully curated tours.
-        </p>
+        <div className="explore-tour-list">
+          {hotTours.map((t, i) => (
+            <div key={i} className="explore-tour-item">
+              <img src={t.image_url} alt={t.tour_name} />
 
-        <div className='explore-tour-list'>
-          {list_tour_1.map((tour, index) => (
-            <div key={tour.id || index} className='explore-tour-item'>
-              <img src={tour.tour_image} alt={tour.tour_name} />
-              <h3>{tour.tour_name}</h3>
-              <p>Start Date: {tour.start_date}</p>
-              <p>Period: {tour.period}</p>
-              <p>Slot: {tour.available ? "Available" : "Fully booked"}</p>
+              <h3>{t.tour_name}</h3>
+              <p>Start Date: {t.start_date}</p>
+              <p>Period: {t.period}</p>
+              <p>Slot: {t.available_slots}</p>
+
               <div className="tour-price-row">
-              <p className="tour-price">{tour.price}</p>
-              <Link to={`/tour-details/${tour.id}`} className="tour-link-button">
-               <button>View Details</button>
-              </Link>
-            </div>
+                <p className="tour-price">{t.price}$</p>
+                <Link to={`/tour-details/${t.id}`}>
+                  <button className="view-details-btn">View Details</button>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
-      </div>
 
-      {/* ✅ Tour 2 */}
-      <div className='explore-tour-2' id='explore-tour-2'>
+        {/* EDUCATION TOURS */}
         <h2>Tour with education</h2>
-        <p className='explore-tour-description'>
-          Learn by doing — immerse yourself in Vietnam’s rural life while gaining hands-on knowledge through every journey.
-        </p>
+        <div className="explore-tour-list">
+          {eduTours.length === 0 ? (
+            <p>No education tours available.</p>
+          ) : (
+            eduTours.map((t, i) => (
+              <div key={i} className="explore-tour-item">
+                <img src={t.image_url} alt={t.tour_name} />
 
-        <div className='explore-tour-list'>
-          {list_tour_2.map((tour, index) => (
-            <div key={tour.id || index} className='explore-tour-item'>
-              <img src={tour.tour_image} alt={tour.tour_name} />
-              <h3>{tour.tour_name}</h3>
-              <p>Start Date: {tour.start_date}</p>
-              <p>Period: {tour.period}</p>
-              <p>Slot: {tour.available ? "Available" : "Fully booked"}</p>
-              <div className="tour-price-row">
-              <p className="tour-price">{tour.price}</p>
-              <Link to={`/tour-details/${tour.id}`} className="tour-link-button">
-                <button>View Details</button>
-              </Link>
-            </div>
-            </div>
-          ))}
+                <h3>{t.tour_name}</h3>
+                <p>Start Date: {t.start_date}</p>
+                <p>Period: {t.period}</p>
+                <p>Slot: {t.available_slots}</p>
+
+                <div className="tour-price-row">
+                  <p className="tour-price">{t.price}$</p>
+                  <Link to={`/tour-details/${t.id}`}>
+                    <button className="view-details-btn">View Details</button>
+                  </Link>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
-       
-      {showRegionTours && (
-         
-         
+
+      {/* REGION FILTERED TOURS */}
+      {region !== "All" && (
         <div className="main-region-tour" ref={regionSectionRef}>
-         <h2>Tour in {region}</h2>
+          <h2>Tour in {region}</h2>
+
           <div className="main-tour-list">
-          {allRegionTours.map((tour, index) => (
-          <div key={tour.id || `${tour.tour_name}-${index}`} className="main-tour-item">
-            <img src={tour.tour_image} alt={tour.tour_name} />
-            <h3>{tour.tour_name}</h3>
-            <p>Start Date: {tour.start_date}</p>
-            <p>Period: {tour.period}</p>
-            <p>Slot: {tour.available ? "Available" : "Fully booked"}</p>
-            <div className="tour-price-row">
-              <p className="tour-price">{tour.price}</p>
-              <Link to={`/tour-details/${tour.id}`} className="tour-link-button">
-                <button>View Details</button>
-              </Link>
-            </div>
+            {filteredRegionTours.length === 0 ? (
+              <p>No tours available in this region.</p>
+            ) : (
+              filteredRegionTours.map((t, i) => (
+                <div key={i} className="main-tour-item">
+                  <img src={t.image_url} alt={t.tour_name} />
+
+                  <h3>{t.tour_name}</h3>
+                  <p>Start Date: {t.start_date}</p>
+                  <p>Period: {t.period}</p>
+                  <p>Slot: {t.available_slots}</p>
+
+                  <div className="tour-price-row">
+                    <p className="tour-price">{t.price}$</p>
+                    <Link to={`/tour-details/${t.id}`}>
+                      <button className="view-details-btn">View Details</button>
+                    </Link>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
-          ))}
-          </div> 
         </div>
-     )}
+      )}
     </>
   );
 };
 
 export default Tour;
-
-

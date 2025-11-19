@@ -13,6 +13,11 @@ const ConfirmBookingPage = () => {
   const { removeBooking } = useCart();
   const { addUpcomingTour } = useUserTours();
 
+  const formatDate = (dateStr) => {
+  if (!dateStr) return "Updating...";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-GB"); // DD/MM/YYYY
+};
   if (!state) {
     return <h2 style={{ padding: 40 }}>No booking data found.</h2>;
   }
@@ -66,7 +71,7 @@ const ConfirmBookingPage = () => {
         passengers,
         customer,
         totalAmount,
-        startDate: tour.start_date,
+        startDate: formatDate(tour.start_date),
         passengerCount
       });
 
@@ -87,7 +92,11 @@ const ConfirmBookingPage = () => {
         <h2 className="section-title">Tour Information</h2>
 
         <div className="tour-confirm-wrapper">
-          <img src={tour.tour_image} alt={tour.tour_name} className="tour-img" />
+          <img
+            src={tour.tour_image || tour.image_url}
+            alt={tour.tour_name}
+            className="tour-img"
+          />
 
           <table className="tour-info-table">
             <tbody>
@@ -109,7 +118,7 @@ const ConfirmBookingPage = () => {
               </tr>
               <tr>
                 <td className="label">Start Date</td>
-                <td>{tour.start_date}</td>
+                <td>{formatDate(tour.start_date)}</td>
               </tr>
               <tr>
                 <td className="label">Departure</td>

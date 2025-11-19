@@ -9,12 +9,12 @@ import AdminLayout from './pages/Admin/AdminLayout';
 import { AuthProvider, useAuth } from './context-store/AuthContext';
 import Dashboard from './pages/Admin/Dashboard';
 import BookingTour from './pages/Admin/BookingTour';
+import BookPage from './pages/Booking/BookPage';
 import ManageCustomers from './pages/Admin/ManageCustomers';
 import ManageTours from './pages/Admin/ManageTours';
 import Settings from './pages/Admin/Settings';
 import ManagePartners from './pages/Admin/ManagePartners';
 import TourDetail from './pages/Tour/TourDetail';
-import BookTourPage from './pages/Booking/BookTourPage';
 import ConfirmBookingPage from './pages/Booking/ConfirmBookingPage';
 import {CartProvider} from './context-store/CartContext';
 import UserPanel from './pages/User/UserPanel';
@@ -37,7 +37,7 @@ const AppContent = () => {
           <Route path="/" element={<Home />} />
           <Route path="/tour" element={<Tour />} />
           <Route path="/tour-details/:id" element={<TourDetail />} />
-          <Route path="/book-tour/:id" element={<BookTourPage />} />
+          <Route path="/book-tour/:id" element={<BookPage/>} />
           <Route path="/partner/*" element={<PartnerLayout user={user} />} />
           <Route path="/confirm-booking" element={<ConfirmBookingPage />} />
           <Route path="/user/panel" element={<UserPanel />} />

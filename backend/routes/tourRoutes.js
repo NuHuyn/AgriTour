@@ -4,7 +4,7 @@ const tourController = require("../controllers/tourController");
 const multer = require("multer");
 const path = require("path");
 
-//  Cấu hình nơi lưu ảnh
+// UPLOAD CONFIG
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "..", "uploads", "tours"));
@@ -15,39 +15,50 @@ const storage = multer.diskStorage({
       "-" +
       Math.round(Math.random() * 1e9) +
       path.extname(file.originalname);
+
     cb(null, uniqueName);
   },
 });
 
 const upload = multer({ storage });
 
-// === Public routes ===
+// =====================
+// ADMIN ROUTES
+// =====================
 
-//  ĐƯA ROUTE NÀY LÊN TRÊN
 router.get("/admin/all", tourController.getAllToursForAdmin);
 
-// Lấy tất cả tour
+router.put("/review/:tour_id", tourController.reviewTour);
+
+// =====================
+// PUBLIC ROUTES
+// =====================
+
 router.get("/", tourController.getAllTours);
 
-// Lọc tour theo region hoặc category (phải đặt trước route :id)
 router.get("/filter/by-region/:region_id", tourController.getToursByRegion);
+
 router.get("/filter/by-category/:category_id", tourController.getToursByCategory);
 
-//  Route dạng /:tour_id PHẢI ĐỂ XUỐNG CUỐI
-router.get("/:tour_id", tourController.getTourById);
+// =====================
+// PARTNER / ADMIN ACTIONS
+// =====================
 
-// === Partner/Admin actions ===
-
-// Tạo tour (partner hoặc admin)
 router.post("/", upload.single("image"), tourController.createTour);
 
-// Cập nhật tour (partner hoặc admin)
-router.put("/:tour_id", upload.single("image"), tourController.updateTour);
+router.put("/update/:tour_id", upload.single("image"), tourController.updateTour);
 
-// Admin duyệt hoặc từ chối tour
-router.put("/:tour_id/approve", tourController.approveTour);
+router.delete("/delete/:tour_id", tourController.deleteTour);
 
-// Xóa tour (chỉ admin)
-router.delete("/:tour_id", tourController.deleteTour);
+// ⚠ ROUTE LẤY TOUR THEO ID — PHẢI ĐỂ CUỐI
+console.log("🔍 getTourById =", tourController.getTourById);
+router.get("/:tour_id", tourController.getTourById);
 
 module.exports = router;
+
+console.log("====== REGISTERED ROUTES ======");
+router.stack.forEach(layer => {
+  if (layer.route) {
+    console.log(layer.route.stack[0].method.toUpperCase(), "=>", layer.route.path);
+  }
+});

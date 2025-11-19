@@ -152,19 +152,20 @@
   margin: 0;
 }
 
-.tour-link-button button {
-  padding: 6px 12px;
-  background-color:  rgb(15, 89, 15);
-  color: white;
+.view-details-btn {
+  padding: 8px 14px;
+  background-color: #0f5915; /* xanh lá cây */
+  color: #fff; /* chữ trắng */
   border: none;
-  border-radius: 6px;
+  border-radius: 6px; /* bo góc */
+  font-weight: 600;
   font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin-right: 15px;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  
 }
 
-.tour-link-button button:hover {
-  background-color: #0c6349;
+.view-details-btn:hover {
+  background-color: #145014; /* xanh lá đậm hơn khi hover */
+  transform: translateY(-2px);
 }
-

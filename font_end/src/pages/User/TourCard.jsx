@@ -18,6 +18,8 @@ const TourCard = ({ item, status, onView, onCancel, onRate }) => {
         </p>
         <p className="tour-detail"><b>Total Price:</b> ${item.totalAmount}</p>
         <p className="tour-detail"><b>Start Date:</b> {item.startDate}</p>
+        <p className="tour-detail"><b>End Date:</b> {item.endDate}</p>
+        
 
         <span className={`badge badge-${status}`}>{status.toUpperCase()}</span>
 
