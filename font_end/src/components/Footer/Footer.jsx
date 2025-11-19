@@ -5,7 +5,7 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer className="footer-wrapper">
-
+     <div className="footer-inner">
       {/* TOP GRID */}
       <div className="footer-grid">
 
@@ -132,12 +132,11 @@ const Footer = () => {
 
 </div>
 
-
       <p className="footer-copy">
         © 2025 Agritour. All rights reserved.
       </p>
-
-    </footer>
+    </div>
+   </footer>
   )
 }
 
