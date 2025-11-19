@@ -21,7 +21,8 @@ import UserPanel from './pages/User/UserPanel';
 import { UserToursProvider } from './context-store/UserToursContext';
 import TourInfoPage from './pages/User/TourInfoPage';
 import News from './pages/News/News';
-
+import Contact from './pages/Contact/Contact';
+import Footer from './components/Footer/Footer';
 const AppContent = () => {
   const { user, setUser } = useAuth();
   const [showLogin, setShowLogin] = React.useState(false);
@@ -31,7 +32,7 @@ const AppContent = () => {
       {showLogin && <LoginPopup setShowLogin={setShowLogin} setUser={setUser} />}
       <div className="app">
         <Navbar setShowLogin={setShowLogin} user={user} setUser={setUser} />
-
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tour" element={<Tour />} />
@@ -42,6 +43,7 @@ const AppContent = () => {
           <Route path="/user/panel" element={<UserPanel />} />
           <Route path="/tour-info" element={<TourInfoPage />} />
           <Route path="/news" element={<News />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<AdminLayout />}>
              <Route index element={<Dashboard />} /> {/* khi vào /admin tự vào dashboard */}
              <Route path="dashboard" element={<Dashboard />} />
@@ -53,6 +55,7 @@ const AppContent = () => {
           </Route>
 
         </Routes>
+        <Footer />
       </div>
     </>
   );
