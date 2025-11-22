@@ -52,15 +52,15 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
 
       alert(data.message);
 
-      /** 🔥 LƯU USER VÀO LOCAL STORAGE */
+      /**  LƯU USER VÀO LOCAL STORAGE */
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      /** 🔥 LƯU LÊN CONTEXT (App.jsx) */
+      /**  LƯU LÊN CONTEXT (App.jsx) */
       setUser(data.user);
 
       setShowLogin(false);
 
-      /** 🔥 Điều hướng theo role */
+      /**  Điều hướng theo role */
       if (data.user.role === "partner") {
         navigate("/partner/dashboard");
       } else if (data.user.role === "admin") {

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./ConfirmBookingPage.css";
 import { useUserTours } from "../../context-store/UserToursContext";
 import { useCart } from "../../context-store/CartContext";
-import { useAuth } from "../../context-store/AuthContext";   // ⭐ ADD: Lấy user đang đăng nhập
+import { useAuth } from "../../context-store/AuthContext";   //  ADD: Lấy user đang đăng nhập
 
 const ConfirmBookingPage = () => {
   const { state } = useLocation();
@@ -24,7 +24,7 @@ const ConfirmBookingPage = () => {
 
   const { tempId, tour, customer, passengers, paymentMethod, totalAmount } = state;
 
-  // ⭐ HANDLE CONFIRM BOOKING + CONNECT BACKEND
+  //  HANDLE CONFIRM BOOKING + CONNECT BACKEND
   const handleConfirmPay = async () => {
     try {
       if (!user) {
@@ -38,14 +38,14 @@ const ConfirmBookingPage = () => {
         passengers.smallChildren +
         passengers.infants;
 
-      // ⭐ CALL BACKEND: CREATE BOOKING
+      //  CALL BACKEND: CREATE BOOKING
       const response = await fetch("http://localhost:5000/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          user_id: user.user_id,   // ⭐ Dùng user thật
+          user_id: user.user_id,   //  Dùng user thật
           tour_id: tour.id,
           num_people: passengerCount,
           total_price: totalAmount
@@ -59,12 +59,12 @@ const ConfirmBookingPage = () => {
         return;
       }
 
-      // ⭐ DELETE TEMP CART BOOKING
+      //  DELETE TEMP CART BOOKING
       if (tempId) {
         removeBooking(tempId);
       }
 
-      // ⭐ ADD TO UPCOMING TOUR LOCAL
+      //  ADD TO UPCOMING TOUR LOCAL
       addUpcomingTour({
         bookingId: data.booking_id || Date.now(), // fallback nếu backend không trả ID
         tour,

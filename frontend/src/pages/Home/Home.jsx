@@ -9,7 +9,7 @@ const Home = () => {
       <Header/>
        <div className="home-wrapper">
 
-      {/* BANNER — cái này là của em */}
+      {/* BANNER /}
 
       {/* ABOUT US SECTION */}
       <section className="about-container">

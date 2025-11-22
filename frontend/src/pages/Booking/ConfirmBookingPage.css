@@ -122,7 +122,7 @@
 }
 
 .confirm-btn {
-  flex: 1;                  /* 🔥 Quan trọng: full chiều ngang còn lại */
+  flex: 1;                
   padding: 14px 0;
   background: #234423;
   color: #fff;

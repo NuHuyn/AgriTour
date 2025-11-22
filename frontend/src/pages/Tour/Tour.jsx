@@ -39,7 +39,7 @@ const Tour = () => {
     end_date: formatDate(t.end_date),
     period: calcPeriod(t.start_date, t.end_date),
     price: t.price,
-    region_name: regionMapDB[t.region_id], // ⭐ GIẢI QUYẾT LỖI LỌC REGION
+    region_name: regionMapDB[t.region_id], 
     available_slots: t.available_slots
   });
 
@@ -56,13 +56,13 @@ const Tour = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  // ⭐ HOT Tours = 4 tour đầu tiên
+  // HOT Tours = 4 tour đầu tiên
   const hotTours = dbTours.slice(0, 4);
 
-  // ⭐ Education Tours = region CENTRAL
+  //  Education Tours = region CENTRAL
   const eduTours = dbTours.filter((t) => t.region_name === "Central");
 
-  // ⭐ Lọc theo region người dùng chọn
+  //  Lọc theo region người dùng chọn
   const filteredRegionTours =
     region === "All"
       ? []

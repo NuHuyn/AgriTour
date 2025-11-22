@@ -123,7 +123,7 @@
   border-left: 5px solid rgb(21, 55, 21);
 }
 
-/* ⭐ Sửa để DAY 1… full khung xanh */
+
 .itinerary-day h3 {
   background: rgb(32, 148, 32);
   color: white;
@@ -146,7 +146,7 @@
   flex-wrap: wrap;
 }
 
-/* ⭐ Sửa ảnh itinerary nhỏ lại */
+
 .itinerary-images img {
   width: 100%;
   max-width: 333px;

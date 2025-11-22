@@ -2,7 +2,7 @@ import React, { useState , useEffect, useRef} from 'react';
 import './Admin.css';
 import { list_tour_1 } from '../../assets/assets';
 const BookingTour = ({user}) => {
-   //có thể xóa nha nếu kết hợp với dữ liệu back end
+   
   const bookings = list_tour_1.map((tour, index) => ({
   id: index + 1,
   tourName: tour.tour_name,

@@ -3,7 +3,7 @@ import "./TourCard.css";
 import TourInfoPage from "./TourInfoPage";
 import { useNavigate } from "react-router-dom";
 const TourCard = ({ item, status, onView, onCancel, onRate }) => {
-  const navigate = useNavigate();   // 🔥 THÊM NÈ
+  const navigate = useNavigate();   
 
   return (
     <div className="tour-card">

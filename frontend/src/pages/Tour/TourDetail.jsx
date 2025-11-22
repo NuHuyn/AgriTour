@@ -113,7 +113,7 @@ const TourDetail = () => {
 
             {Number(id) === 38 ? (
               <>
-                {/* --- THÔNG TIN RIÊNG CHO TOUR 29 --- */}
+                {/* --- THÔNG TIN RIÊNG CHO TOUR  --- */}
                 <div className="tour-highlight-table">
                   <p><strong>Route:</strong> Ho Chi Minh → Vinh long</p>
                   <p><strong>Duration:</strong> 3 days 2 nights</p>
@@ -150,7 +150,7 @@ const TourDetail = () => {
 
             {Number(id) === 38 ? (
               <>
-                {/* 🟦 ITINERARY RIÊNG CHO TOUR 29 */}
+                {/*  ITINERARY RIÊNG CHO TOUR  */}
 
                 {/* DAY 1 */}
                 <div className="itinerary-day">
@@ -182,7 +182,7 @@ const TourDetail = () => {
               </>
             ) : (
               <>
-                {/* 🟩 ITINERARY MẶC ĐỊNH CHO CÁC TOUR KHÁC */}
+                {/*  ITINERARY MẶC ĐỊNH CHO CÁC TOUR KHÁC */}
 
                 {/* DAY 1 */}
                 <div className="itinerary-day">
