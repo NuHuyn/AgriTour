@@ -19,59 +19,60 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const url =
-      currState === "Login"
-        ? "http://localhost:5000/api/auth/login"
-        : "http://localhost:5000/api/auth/register";
+  const url =
+    currState === "Login"
+      ? "http://localhost:5000/api/auth/login"
+      : "http://localhost:5000/api/auth/register";
 
-    const body =
-      currState === "Login"
-        ? { email: formData.email, password: formData.password }
-        : {
-            full_name: formData.full_name,
-            email: formData.email,
-            password: formData.password,
-            phone: formData.phone,
-          };
+  const body =
+    currState === "Login"
+      ? { email: formData.email, password: formData.password }
+      : {
+          full_name: formData.full_name,
+          email: formData.email,
+          password: formData.password,
+          phone: formData.phone,
+        };
 
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (!res.ok) {
-        alert(data.message || "Something went wrong");
-        return;
-      }
+    if (!res.ok) {
+      alert(data.message || "Something went wrong");
+      return;
+    }
 
-      alert(data.message);
+    alert(data.message);
 
-      /**  LƯU USER VÀO LOCAL STORAGE */
+    /** Nếu là Login → lưu user */
+    if (currState === "Login") {
       localStorage.setItem("user", JSON.stringify(data.user));
-
-      /**  LƯU LÊN CONTEXT (App.jsx) */
       setUser(data.user);
 
-      setShowLogin(false);
-
-      /**  Điều hướng theo role */
       if (data.user.role === "partner") {
         navigate("/partner/dashboard");
       } else if (data.user.role === "admin") {
         navigate("/admin/dashboard");
-      } 
-      setShowLogin(false);
-    } catch (err) {
-      console.error("Login error:", err);
-      alert("Server error");
+      }
     }
-  };
+
+    // Đóng popup sau khi xử lý
+    setShowLogin(false);
+
+  } catch (err) {
+    console.error("Login/Register error:", err);
+    alert("Server error");
+  }
+};
+
 
   return (
     <div className="login-popup">

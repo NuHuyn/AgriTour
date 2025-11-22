@@ -1,5 +1,24 @@
 const db = require("../db");
 
+
+//get tour for each partner
+exports.getToursByPartner = (req, res) => {
+  const { user_id } = req.params;
+
+  const sql = `
+    SELECT *
+    FROM tours
+    WHERE created_by = ?
+    ORDER BY tour_id DESC
+  `;
+
+  db.query(sql, [user_id], (err, rows) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(rows);
+  });
+};
+
+
 // ===============================
 // 📌 GET TOUR BY ID
 // ===============================
@@ -246,3 +265,5 @@ exports.getAllTours = (req, res) => {
     res.json(rows);
   });
 };
+
+

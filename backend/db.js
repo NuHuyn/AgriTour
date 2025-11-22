@@ -22,6 +22,7 @@ db.query("SELECT DATABASE() AS db", (err, rows) => {
   console.log("🔥 API đang dùng database:", rows[0].db);
 });
 */
+
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
@@ -34,9 +35,9 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) {
-    console.error("❌ Lỗi kết nối MySQL:", err);
+    console.error(" Lỗi kết nối MySQL:", err);
   } else {
-    console.log("✅ Kết nối MySQL thành công!");
+    console.log(" Kết nối MySQL thành công!");
   }
 });
 
@@ -45,8 +46,9 @@ module.exports = db;
 // Kiểm tra đang dùng DB nào
 db.query("SELECT DATABASE() AS db", (err, rows) => {
   if (err) {
-    console.error("❌ Lỗi query DB:", err);
+    console.error(" Lỗi query DB:", err);
     return;
   }
-  console.log("🔥 API đang dùng database:", rows[0].db);
+  console.log(" API đang dùng database:", rows[0].db);
 });
+

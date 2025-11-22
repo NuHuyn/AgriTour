@@ -10,7 +10,7 @@ const PartnerTours = ({ user }) => {
   // 📌 Lấy danh sách tour
   useEffect(() => {
     if (!user?.user_id) return;
-    const url = `http://localhost:5000/api/tours?role=${user.role}&created_by=${user.user_id}`;
+    const url = `http://localhost:5000/api/tours/partner/${user.user_id}`;
     console.log("🔗 Fetching tours from:", url);
 
     fetch(url)

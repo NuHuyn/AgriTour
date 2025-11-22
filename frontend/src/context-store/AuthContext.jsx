@@ -43,12 +43,18 @@ import React, { createContext, useState, useContext } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // Lấy user từ localStorage (nếu có)
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-
-  // Nếu có user trong localStorage → dùng
-  // Nếu không → null
-  const [user, setUser] = useState(storedUser || null);
+  // Lấy user từ localStorage một cách an toàn (không bị lỗi JSON.parse)
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem("user");
+      if (!saved || saved === "undefined") return null;  // Không parse undefined
+      return JSON.parse(saved);
+    } catch (error) {
+      console.error("Lỗi khi parse user từ localStorage:", error);
+      localStorage.removeItem("user");
+      return null;
+    }
+  });
 
   // Hàm login
   const login = (userData) => {
