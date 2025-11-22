@@ -199,7 +199,7 @@ exports.getBookingsByUser = (req, res) => {
       b.infants,
 
       t.tour_name,
-      CONCAT('http://localhost:8081', t.image_url) AS image_url,
+      CONCAT('http://localhost:5000', t.image_url) AS image_url,
       t.start_date,
       t.end_date,
       t.price

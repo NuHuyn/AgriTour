@@ -22,17 +22,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// =====================
-// ADMIN ROUTES
-// =====================
+
 
 router.get("/admin/all", tourController.getAllToursForAdmin);
 
 router.put("/review/:tour_id", tourController.reviewTour);
 
-// =====================
-// PUBLIC ROUTES
-// =====================
+
 
 router.get("/", tourController.getAllTours);
 
@@ -40,9 +36,6 @@ router.get("/filter/by-region/:region_id", tourController.getToursByRegion);
 
 router.get("/filter/by-category/:category_id", tourController.getToursByCategory);
 
-// =====================
-// PARTNER / ADMIN ACTIONS
-// =====================
 
 router.post("/", upload.single("image"), tourController.createTour);
 

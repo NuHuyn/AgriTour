@@ -49,6 +49,21 @@ import logo from './logo.png'
 import ticket_icon from './ticket_icon.png'
 import upload_icon from './upload_icon.png'
 import admin_icon from './admin_icon.png'
+import dak1 from './dak1.jpg'
+import dak12 from './dak12.jpg'
+import dak21 from './dak21.jpg'
+import dak22 from './dak22.jpg'
+import dak31 from './dak31.jpg'
+import dak32 from './dak32.jpg'
+import dak41 from './dak41.jpg'
+import dak42 from './dak42.jpg'
+import dak51 from './dak51.jpg'
+import dak52 from './dak52.jpg'
+import vinhlong11 from './vinhlong11.jpg'
+import vinhlong12 from './vinhlong12.jpg'
+import vinhlong21 from './vinhlong21.webp'
+import vinhlong22 from './vinhlong22.jpg'
+import customer_icon from './customer_icon.png'
 
 export const assets = {
   user_icon,
@@ -100,7 +115,22 @@ export const assets = {
   logo,
   ticket_icon,
   upload_icon,
-  admin_icon
+  admin_icon,
+  dak1,
+  dak12,
+  dak21,
+  dak22,
+  dak31,
+  dak32,
+  dak41,
+  dak42,
+  dak51,
+  dak52,
+  vinhlong11,
+  vinhlong12,
+  vinhlong21,
+  vinhlong22,
+  customer_icon,
 };
 
 

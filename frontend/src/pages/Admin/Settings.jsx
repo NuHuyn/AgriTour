@@ -1,9 +1,10 @@
 import React from 'react'
+import './Admin.css'
 
 const Settings = () => {
   return (
     <div>
-      <h1 className="text-xl font-semibold">Admin Settings</h1>
+      <h1 className="manage_customer">Admin Settings</h1>
     </div>
   )
 }

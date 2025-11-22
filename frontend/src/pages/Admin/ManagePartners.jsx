@@ -7,25 +7,25 @@ import './Admin.css';
 const mockPartners = [
   {
     id: 1,
-    name: "Nguyễn Văn A",
+    name: "Nguyen Van A",
     email: "partnerA@agrifarm.vn",
-    location: "Đà Lạt",
+    location: "Da Lat",
     farm: "Farm A",
     publishedTours: 3,
     totalBookings: 42,
   },
   {
     id: 2,
-    name: "Trần Thị B",
+    name: "Tran Thi B",
     email: "partnerB@agrifarm.vn",
-    location: "Bến Tre",
+    location: "Ben Tre",
     farm: "Farm B",
     publishedTours: 5,
     totalBookings: 68,
   },
   {
     id: 3,
-    name: "Lê Văn C",
+    name: "Le Van C",
     email: "partnerC@agrifarm.vn",
     location: "Gia Lai",
     farm: "Farm C",
@@ -51,7 +51,7 @@ const ManagePartners = () => {
 
   const handleEdit = (id) => alert(`Edit partner ID: ${id}`);
   const handleDelete = (id) => {
-    if (window.confirm("Bạn có chắc muốn xóa partner này không?")) {
+    if (window.confirm("Are you sure to delete?")) {
       alert(`Deleted partner ID: ${id}`);
     }
   };
@@ -92,28 +92,28 @@ const ManagePartners = () => {
       <div className="partner-filter">
   <input
     type="text"
-    placeholder="Tìm theo tên, email..."
+    placeholder="Find by name,..."
     value={searchTerm}
     onChange={(e) => setSearchTerm(e.target.value)}
   />
 
   <select value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)}>
-    <option value="">Tất cả địa điểm</option>
-    <option value="Đà Lạt">Đà Lạt</option>
-    <option value="Bến Tre">Bến Tre</option>
+    <option value="">All location</option>
+    <option value="Đà Lạt">Da Lat</option>
+    <option value="Bến Tre">Ben Tre</option>
     <option value="Gia Lai">Gia Lai</option>
   </select>
 
   <input
     type="number"
-    placeholder="Số tour tối thiểu"
+    placeholder="Tours published min"
     value={minTours}
     onChange={(e) => setMinTours(e.target.value)}
   />
 
   <input
     type="number"
-    placeholder="Số booking tối thiểu"
+    placeholder="Tour bookings min"
     value={minBookings}
     onChange={(e) => setMinBookings(e.target.value)}
   />

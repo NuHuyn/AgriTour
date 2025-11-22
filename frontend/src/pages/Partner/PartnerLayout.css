@@ -1,14 +1,14 @@
 /* ====== LAYOUT ====== */
 .partner-layout {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   background: #f5f5f5;
 }
 
 /* ====== SIDEBAR (giống admin panel) ====== */
 .sidebar {
   width: 240px;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #ffffff;
   border-right: 1px solid #e0e0e0;
   padding: 24px 16px;
@@ -74,5 +74,4 @@
   padding: 24px;
   border-radius: 16px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
-  min-height: calc(100vh - 60px);
 }

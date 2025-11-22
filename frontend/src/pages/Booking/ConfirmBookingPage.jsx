@@ -39,7 +39,7 @@ const ConfirmBookingPage = () => {
         passengers.infants;
 
       // ⭐ CALL BACKEND: CREATE BOOKING
-      const response = await fetch("http://localhost:8081/api/bookings", {
+      const response = await fetch("http://localhost:5000/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

@@ -32,7 +32,7 @@ const AppContent = () => {
       {showLogin && <LoginPopup setShowLogin={setShowLogin} setUser={setUser} />}
       <div className="app">
         <Navbar setShowLogin={setShowLogin} user={user} setUser={setUser} />
-        
+        <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tour" element={<Tour />} />
@@ -55,6 +55,7 @@ const AppContent = () => {
           </Route>
 
         </Routes>
+        </div>
         <Footer />
       </div>
     </>

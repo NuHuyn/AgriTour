@@ -28,7 +28,7 @@ const UserPanel = () => {
 
     const fetchTours = async () => {
       try {
-        const res = await fetch(`http://localhost:8081/api/bookings/user/${user.user_id}`);
+        const res = await fetch(`http://localhost:5000/api/bookings/user/${user.user_id}`);
         if (!res.ok) throw new Error("Failed to fetch tours");
         const data = await res.json();
 
@@ -54,10 +54,10 @@ const UserPanel = () => {
               tour_name: b.tour_name,
               tour_image: b.image_url.startsWith("http")
                 ? b.image_url
-                : `http://localhost:8081${b.image_url}`,
+                : `http://localhost:5000${b.image_url}`,
               image_url: b.image_url.startsWith("http")
                 ? b.image_url
-                : `http://localhost:8081${b.image_url}`,
+                : `http://localhost:5000${b.image_url}`,
               start_date: formatDate(b.start_date),
               end_date: formatDate(b.end_date),
               price: b.price

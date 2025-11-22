@@ -1,9 +1,7 @@
 const db = require("../db");
 const bcrypt = require("bcryptjs");
 
-/**
- * Register new account
- */
+
 exports.register = (req, res) => {
   const { full_name, email, password, phone, role } = req.body;
 
@@ -24,6 +22,7 @@ exports.register = (req, res) => {
     res.status(201).json({ message: "User registered successfully!" });
   });
 };
+
 
 /**
  * Login user
@@ -46,3 +45,4 @@ exports.login = (req, res) => {
     res.status(200).json({ message: "Login successful", user });
   });
 };
+

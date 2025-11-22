@@ -8,19 +8,26 @@ const PartnerTours = ({ user }) => {
   const [search, setSearch] = useState("");
 
   // 📌 Lấy danh sách tour
-useEffect(() => {
-  if (!user?.user_id) return;
-  const url = `http://localhost:8081/api/tours?role=${user.role}&created_by=${user.user_id}`;
-  console.log("🔗 Fetching tours from:", url);
+  useEffect(() => {
+    if (!user?.user_id) return;
+    const url = `http://localhost:5000/api/tours?role=${user.role}&created_by=${user.user_id}`;
+    console.log("🔗 Fetching tours from:", url);
 
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      console.log("📦 Tours fetched:", data);
-      setTours(data);
-    })
-    .catch(err => console.error("Fetch tours error:", err));
-}, [user]);
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        console.log("📦 Tours fetched:", data);
+        // Sắp xếp theo created_at (mới nhất lên đầu)
+        const sorted = [...data].sort((a, b) => {
+          if (!a.created_at) return 1;   // Nếu thiếu created_at, cho xuống dưới
+          if (!b.created_at) return -1;
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+
+        setTours(sorted);
+      })
+      .catch(err => console.error("Fetch tours error:", err));
+  }, [user]);
 
 
   // Lọc theo search
@@ -53,7 +60,7 @@ useEffect(() => {
               <div className="tour-info">
                 {tour.image_url ? (
                   <img
-                    src={`http://localhost:8081${tour.image_url}`}
+                    src={`http://localhost:5000${tour.image_url}`}
                     alt={tour.tour_name}
                   />
                 ) : (
@@ -63,7 +70,21 @@ useEffect(() => {
                   <h3>{tour.tour_name}</h3>
                   <p>Location: {tour.location}</p>
                   <p>Price: ${tour.price}</p>
-                  <p>Status: {tour.status || "pending"}</p>
+                  <p>
+                    Status:{" "}
+                    <span
+                      className={
+                        "status-badge " +
+                        (tour.status === "approved"
+                          ? "status-approved"
+                          : tour.status === "rejected"
+                            ? "status-rejected"
+                            : "status-pending")
+                      }
+                    >
+                      {tour.status || "pending"}
+                    </span>
+                  </p>
                 </div>
               </div>
               <div className="tour-actions">

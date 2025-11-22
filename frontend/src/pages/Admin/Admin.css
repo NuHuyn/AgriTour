@@ -24,7 +24,7 @@
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 24px;
-  color: #2e7d32;
+  color: rgb(20, 68, 5);
 }
 
 .booking-table {
@@ -145,6 +145,15 @@
   font-size: 13px;
 }
 
+.status.rejected {
+  background-color: #c87373;
+  color: #850d06;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
 .status.approved {
   background-color: #d4edda;
   color: #155724;
@@ -209,6 +218,19 @@
   white-space: nowrap;
 }
 
+.action-btn.edit {
+  background-color: #e97831;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-left: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  width: 100px;
+  height: 45px;
+}
+
 .action-btn.approve {
   background-color: #28a745;
   color: white;
@@ -218,10 +240,12 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 13px;
+  width: 100px;
+  height: 45px;
 }
 
 .action-btn.reject {
-  background-color: #a73928;
+  background-color: #6e1508;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -229,6 +253,9 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 13px;
+  width: 100px;
+  height: 45px;
+  margin-bottom: 20px;
 }
 .pagination {
   margin-top: 16px;
@@ -249,4 +276,11 @@
   background-color: #007bff;
   color: white;
   font-weight: bold;
+}
+
+.manage_customer{
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: rgb(20, 68, 5)
 }

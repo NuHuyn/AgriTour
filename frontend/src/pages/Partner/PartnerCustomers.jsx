@@ -10,9 +10,9 @@ const PartnerCustomers = () => {
 
   // Fake data (có dữ liệu thật thì thay vào)
   const customers = [
-    { id: 1, name: "Nguyễn Văn A", tour: "Northern Vietnam Scenic Tour", phone: "0901234567", status: "Completed" },
-    { id: 2, name: "Trần Thị B", tour: "Central Vietnam Cultural Tour", phone: "0912345678", status: "Pending" },
-    { id: 3, name: "Lê Văn C", tour: "South Vietnam Highlights", phone: "0932345678", status: "Cancelled" },
+    { id: 1, name: "Nguyen Van A", tour: "Northern Vietnam Scenic Tour", phone: "0901234567", status: "Completed" },
+    { id: 2, name: "Tran Thi B", tour: "Central Vietnam Cultural Tour", phone: "0912345678", status: "Pending" },
+    { id: 3, name: "Le Van C", tour: "South Vietnam Highlights", phone: "0932345678", status: "Cancelled" },
   ];
 
   // Filter logic
@@ -25,7 +25,7 @@ const PartnerCustomers = () => {
   return (
     <div>
       <h1>Customer Management</h1>
-      <p>Danh sách khách hàng đã đặt tour của bạn.</p>
+      <p>List of customers.</p>
 
       {/* ==== FILTER SECTION ==== */}
       <div className="filters-row">

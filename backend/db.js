@@ -17,3 +17,7 @@ db.connect((err) => {
 });
 
 module.exports = db;
+
+db.query("SELECT DATABASE() AS db", (err, rows) => {
+  console.log("🔥 API đang dùng database:", rows[0].db);
+});

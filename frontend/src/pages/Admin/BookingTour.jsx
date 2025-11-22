@@ -9,7 +9,7 @@ const BookingTour = ({user}) => {
   status: index % 3 === 0 ? "Confirmed" : index % 3 === 1 ? "Pending" : "Cancelled",
   date: tour.start_date,
   customerCount: Math.floor(Math.random() * 20) + 10,
-  partnerName: tour.partner_name || ["Nguyễn Văn A", "Trần Thị B", "Lê Văn C"][index % 3],
+  partnerName: tour.partner_name || ["Nguyen Van A", "Tran Thi B", "Le Van C"][index % 3],
 }));
    
 
@@ -34,13 +34,13 @@ const BookingTour = ({user}) => {
       <div className="partner-filter">
   <input
     type="text"
-    placeholder="Tìm theo tên tour..."
+    placeholder="Find by name..."
     value={searchTerm}
     onChange={(e) => setSearchTerm(e.target.value)}
   />
 
   <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-    <option value="">Tất cả trạng thái</option>
+    <option value="">All status</option>
     <option value="Confirmed">Confirmed</option>
     <option value="Pending">Pending</option>
     <option value="Cancelled">Cancelled</option>
@@ -48,7 +48,7 @@ const BookingTour = ({user}) => {
 
   <input
     type="text"
-    placeholder="Tìm theo tên partner..."
+    placeholder="Find by partner..."
     value={partnerFilter}
     onChange={(e) => setPartnerFilter(e.target.value)}
   />

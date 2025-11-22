@@ -1,16 +1,11 @@
-
 import React, { useState, useEffect } from "react";
 import "./Admin.css";
 import { useAuth } from "../../context-store/AuthContext";
 
 const ManageTours = () => {
-
-  const { user } = useAuth();  // LẤY USER Ở ĐÂY
+  const { user } = useAuth();
   const [tours, setTours] = useState([]);
-  /*const ManageTours = ({ user }) => {
-    const [tours, setTours] = useState([]);
-  */
-  // Filter states
+
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
@@ -18,87 +13,84 @@ const ManageTours = () => {
   const [regionFilter, setRegionFilter] = useState("");
   const [selectedTour, setSelectedTour] = useState(null);
 
-  // Load tours from backend
+  // ===========================
+  // Fetch tours
+  // ===========================
+  const fetchTours = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/tours/admin/all", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      const data = await res.json();
+      console.log("API DATA:", data);
+      setTours([...data]); // ép re-render
+      setCurrentPage(1);
+    } catch (err) {
+      console.error("Error fetching tours:", err);
+    }
+  };
+
   useEffect(() => {
-    const fetchTours = async () => {
-      try {
-        const res = await fetch("http://localhost:8081/api/tours/admin/all", {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-
-        const data = await res.json();
-        setTours(data);
-      } catch (err) {
-        console.error("Error fetching tours:", err);
-      }
-    };
-
     fetchTours();
   }, [user.token]);
 
+  // ===========================
+  // APPROVE / REJECT (Optimistic Update)
+  // ===========================
   const handleReview = async (tour_id, action) => {
-  const note =
-    action === "rejected"
-      ? prompt("Reason for rejection?")
-      : "";
+  const note = action === "rejected" ? prompt("Reason?") : "";
+
+  // Optimistic UI
+  setTours(prev =>
+    prev.map(t =>
+      t.tour_id === tour_id
+        ? { ...t, status: action, partner_name: t.partner_name }
+        : t
+    )
+  );
 
   try {
     const res = await fetch(
-      `http://localhost:8081/api/tours/review/${tour_id}`,
+      `http://localhost:5000/api/tours/review/${tour_id}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
-        body: JSON.stringify({
-          action,
-          note,
-          admin_id: user.user_id,
-        }),
+        body: JSON.stringify({ action, note }),
       }
     );
 
-    const data = await res.json();
-
     if (!res.ok) {
-      alert(data.message || "Something went wrong!");
+      alert("Error while approving!");
       return;
     }
 
-    alert(data.message);
+    await fetchTours();
 
-    // cập nhật lại UI không cần load lại trang
-    setTours((prev) =>
-      prev.map((t) =>
-        t.tour_id === tour_id ? { ...t, status: action } : t
-      )
-    );
   } catch (err) {
-    console.error("Review error:", err);
     alert("Server error");
   }
 };
 
 
-  // Apply filters
+
+
+
+  // ===========================
+  // FILTERS
+  // ===========================
   const filteredTours = tours.filter((tour) => {
-    const matchesSearch = tour.tour_name
-      ?.toLowerCase()
-      .includes(searchTerm.toLowerCase());
-
+    const matchesSearch = tour.tour_name?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter ? tour.status === statusFilter : true;
-
-    const matchesRegion = regionFilter
-      ? tour.region_name === regionFilter
-      : true;
-
+    const matchesRegion = regionFilter ? tour.region_name === regionFilter : true;
     const matchesLocation = locationFilter
       ? tour.location?.toLowerCase().includes(locationFilter.toLowerCase())
       : true;
-
     const matchesPartner = partnerFilter
       ? tour.partner_name?.toLowerCase().includes(partnerFilter.toLowerCase())
       : true;
@@ -112,7 +104,9 @@ const ManageTours = () => {
     );
   });
 
-  // Pagination
+  // ===========================
+  // PAGINATION
+  // ===========================
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const totalPages = Math.ceil(filteredTours.length / itemsPerPage);
@@ -122,11 +116,14 @@ const ManageTours = () => {
     currentPage * itemsPerPage
   );
 
+  // ===========================
+  // UI RENDER
+  // ===========================
   return (
     <div className="booking-tour-container">
       <h2>Manage Tours</h2>
 
-      {/* === FILTER BAR === */}
+      {/* FILTERS */}
       <div className="partner-filter">
         <input
           type="text"
@@ -164,7 +161,7 @@ const ManageTours = () => {
         </select>
       </div>
 
-      {/* === TABLE === */}
+      {/* TABLE */}
       <table className="booking-table">
         <thead>
           <tr>
@@ -203,11 +200,14 @@ const ManageTours = () => {
                   Edit
                 </button>
 
+                {/* NÚT ẨN NGAY KHI KHÔNG CÒN PENDING */}
                 {tour.status === "pending" && (
                   <>
                     <button
                       className="action-btn approve"
-                      onClick={() => handleReview(tour.tour_id, "approved")}
+                      onClick={async () => {
+                        handleReview(tour.tour_id, "approved");
+                      }}
                     >
                       Approve
                     </button>
@@ -226,7 +226,7 @@ const ManageTours = () => {
         </tbody>
       </table>
 
-      {/* === PAGINATION === */}
+      {/* PAGINATION */}
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, i) => (
           <button
@@ -239,32 +239,6 @@ const ManageTours = () => {
         ))}
       </div>
 
-      {/* === POPUP EDIT (Chưa kết nối backend) === */}
-      {selectedTour && (
-        <div className="popup-overlay" onClick={() => setSelectedTour(null)}>
-          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Edit Tour</h3>
-
-            <form className="edit-form">
-              <input type="text" defaultValue={selectedTour.tour_name} />
-              <input type="text" defaultValue={selectedTour.location} />
-              <input type="date" defaultValue={selectedTour.start_date} />
-              <input type="date" defaultValue={selectedTour.end_date} />
-              <input type="number" defaultValue={selectedTour.price} />
-              <select defaultValue={selectedTour.status}>
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="rejected">Rejected</option>
-              </select>
-
-              <button type="submit">Save</button>
-              <button type="button" onClick={() => setSelectedTour(null)}>
-                Cancel
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -23,8 +23,8 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
 
     const url =
       currState === "Login"
-        ? "http://localhost:8081/api/auth/login"
-        : "http://localhost:8081/api/auth/register";
+        ? "http://localhost:5000/api/auth/login"
+        : "http://localhost:5000/api/auth/register";
 
     const body =
       currState === "Login"
@@ -65,9 +65,8 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
         navigate("/partner/dashboard");
       } else if (data.user.role === "admin") {
         navigate("/admin/dashboard");
-      } else {
-        navigate("/");
-      }
+      } 
+      setShowLogin(false);
     } catch (err) {
       console.error("Login error:", err);
       alert("Server error");

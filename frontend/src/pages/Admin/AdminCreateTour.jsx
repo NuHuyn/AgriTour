@@ -22,7 +22,7 @@ const AdminCreateTour = ({ user }) => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      if (!user) return alert("Vui lòng đăng nhập trước!");
+      if (!user) return alert("Log in first!");
   
       const formData = new FormData();
       Object.keys(form).forEach((key) => formData.append(key, form[key]));
@@ -32,7 +32,7 @@ const AdminCreateTour = ({ user }) => {
   
       try {
         setLoading(true);
-        const res = await fetch("http://localhost:8081/api/tours", {
+        const res = await fetch("http://localhost:5000/api/tours", {
           method: "POST",
           headers: { Authorization: `Bearer ${user.token}` },
           body: formData,

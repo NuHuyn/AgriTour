@@ -1,4 +1,7 @@
-/* Container */
+/* ========================= */
+/* CHATBOT CONTAINER */
+/* ========================= */
+
 .chatbot-container {
   display: flex;
   flex-direction: column;
@@ -11,159 +14,213 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   background: #f9f9f9;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 50;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* ===== FULLSCREEN FIXED ===== */
 .chatbot-container.fullscreen {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9999;
   border-radius: 0;
-
-  /* ❌ BỎ SCALE – nguyên nhân gây lệch */
-  /* transform: scale(1.02); */
-
-  /* ✔ Dùng hiệu ứng đẹp thay thế */
   padding: 20px;
   box-sizing: border-box;
-  background: #f9f9f9;
-  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  z-index: 9999;
+  background: #ffffff;
 }
 
-/* Header */
-.chatbot-header {
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.chatbot-container .chatbot-header {
   display: flex;
   justify-content: flex-end;
-  padding: 10px 30px;
+  padding: 10px 20px;
   background: #0f590f;
 }
 
-.zoom-btn {
+.chatbot-container .zoom-btn {
   padding: 6px 12px;
-  border: none;
-  background: white;
+  background: #fff;
   color: #0f590f;
-  border-radius: 6px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
 }
 
-/* Messages */
-.chatbot-messages {
+/* ========================= */
+/* MESSAGES */
+/* ========================= */
+
+.chatbot-container .chatbot-messages {
   flex: 1;
   padding: 15px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
-/* Message bubble */
-.msg {
+.chatbot-container .msg {
   display: flex;
   align-items: flex-end;
-  max-width: 80%;
+  max-width: 100%;
 }
 
-.msg.user {
+.chatbot-container .msg.user {
   margin-left: auto;
   flex-direction: row-reverse;
-  margin-right: 2px;
-  max-width: 75%;
+  gap: 8px;
 }
 
-.msg.bot {
-  margin-right: auto;
-}
-
-.msg-text {
+.chatbot-container .msg-text {
   padding: 10px 14px;
+  background: #eaeaea;
   border-radius: 14px;
   font-size: 15px;
-  line-height: 1.4;
-  background: #eaeaea;
-  color: #333;
+  word-wrap: break-word;
 }
 
-.msg.user .msg-text {
+.chatbot-container .msg.user .msg-text {
   background: #0f590f;
   color: white;
 }
 
-/* Avatar */
-.avatar {
-  margin: 0 8px;
+.chatbot-container .avatar-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 8px;
+  object-fit: cover;
+}
+
+.chatbot-container .avatar {
+  margin-left: 8px;
   font-size: 20px;
 }
 
-.avatar-img {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 8px;
-}
+/* ========================= */
+/* INPUT BOX */
+/* ========================= */
 
-/* Input box */
-.chatbot-input-box {
+.chatbot-container .chatbot-input-box {
   display: flex;
-  align-items: center;
   gap: 10px;
-  width: 100%;
-  box-sizing: border-box;
   padding: 10px;
-  background: #fff;
+  background: white;
   border-top: 1px solid #eee;
 }
 
-.chatbot-input-box input {
+.chatbot-container .chatbot-input-box input {
   flex: 1;
   padding: 12px;
-  font-size: 16px;
+  border-radius: 10px;
   border: 1px solid #ccc;
-  border-radius: 10px;
-  box-sizing: border-box;
 }
 
-.chatbot-input-box button {
+.chatbot-container .chatbot-input-box button {
   padding: 12px 18px;
-  background: #0c6c2f;
   border: none;
-  border-radius: 10px;
-  color: #fff;
+  border-radius: 8px;
+  color: white;
+  background: #0c6c2f;
   cursor: pointer;
-  white-space: nowrap;
 }
 
-.chatbot-input-box button:hover {
-  background: #0a5a28;
-}
+/* ========================= */
+/* FULLSCREEN STYLE */
+/* ========================= */
 
-/* ===== FULLSCREEN PHÓNG TO ===== */
-.fullscreen .msg-text {
+.chatbot-container.fullscreen .msg-text {
   font-size: 18px;
   padding: 14px 18px;
-  border-radius: 18px;
 }
 
-.fullscreen .avatar-img {
-  width: 60px;
-  height: 60px;
+.chatbot-container.fullscreen .avatar-img {
+  width: 55px;
+  height: 55px;
 }
 
-.fullscreen .msg.bot,
-.fullscreen .msg.user {
-  gap: 16px;
-  margin-bottom: 16px;
+.chatbot-container.fullscreen .chatbot-input-box {
+  padding: 18px;
 }
 
-/* Input box vẫn giữ full width khi fullscreen */
-.fullscreen .chatbot-input-box {
-  width: 100%;
-  max-width: 100%;
-  padding: 15px;
-  box-sizing: border-box;
+/* ==================================================== */
+/* TOUR CARD STYLE – SCOPED TO CHATBOT ONLY */
+/* ==================================================== */
+
+/* Card */
+.chatbot-container .tour-card {
+  display: flex;
+  background: #fff;
+  padding: 6px;
+  border-radius: 10px;
+  margin-top: 10px;
+  max-width: 290px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  transition: all 0.28s ease;
+}
+
+/* Card (fullscreen) */
+.chatbot-container.fullscreen .tour-card {
+  max-width: 480px;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+/* Tour Image */
+.chatbot-container .chatbot-tour-image {
+  width: 150px;
+  height: 95px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.chatbot-container.fullscreen .chatbot-tour-image {
+  width: 220px;
+  height: 140px;
+}
+
+/* Info block */
+.chatbot-container .tour-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Title */
+.chatbot-container .chatbot-tour-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* Price */
+.chatbot-container .chatbot-tour-price {
+  font-size: 15px;
+  font-weight: bold;
+  color: #d62828;
+  margin-bottom: 4px;
+}
+
+/* Button */
+.chatbot-container .tour-btn {
+  padding: 5px 10px;
+  font-size: 13px;
+  background: #0d5612;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.chatbot-container.fullscreen .tour-btn {
+  padding: 7px 15px;
+  font-size: 15px;
 }

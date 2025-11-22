@@ -1,47 +1,51 @@
-.dashboard-summary {
-  display: flex;
-  gap: 20px;
-  margin-top: 30px;
-  flex-wrap: wrap;
-}
-
 .summary-card {
   flex: 1;
   min-width: 250px;
-  background: white;
-  border-radius: 18px;
+  border-radius: 16px;
   padding: 24px 28px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  color: white;
+  box-shadow: 0 4px 12px rgba(104, 123, 103, 0.12);
 }
 
-.summary-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+/* Pending = cam */
+.summary-orange {
+  background: #e69053;
+}
+
+/* Approved = xanh lá */
+.summary-green {
+  background: #0a431e;
+}
+
+/* Rejected = đỏ */
+.summary-red {
+  background: #c21b1b;
 }
 
 .summary-card h3 {
   margin: 0;
   font-size: 16px;
-  color: #4a5568;
   font-weight: 600;
   margin-bottom: 10px;
+  color: white;
 }
 
 .summary-card p {
   margin: 0;
   font-size: 34px;
   font-weight: 700;
+  color: white;
 }
 
-.summary-blue p {
-  color: #2563eb; /* xanh lam */
-}
+.dashboard-summary {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
 
-.summary-orange p {
-  color: #f97316; /* cam */
+  flex-wrap: nowrap;        /* quan trọng: KHÔNG cho xuống dòng */
+  justify-content: space-between; /* dàn đều 3 card */
+  width: 100%;
 }
-
-.summary-green p {
-  color: #16a34a; /* xanh lá */
+.dashboard-title{
+ color:#0a431e
 }

@@ -14,9 +14,9 @@ const BookPage = () => {
   const [loading, setLoading] = useState(true);
 
   const [qtyAdult, setQtyAdult] = useState(1);
-  const [qtyChild, setQtyChild] = useState(0);
-  const [qtySmallChild, setQtySmallChild] = useState(0);
-  const [qtyInfant, setQtyInfant] = useState(0);
+  const [qtyChild, setQtyChild] = useState("0");
+  const [qtySmallChild, setQtySmallChild] = useState("0");
+  const [qtyInfant, setQtyInfant] = useState("0");
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,22 +25,22 @@ const BookPage = () => {
   const [notes, setNotes] = useState("");
 
   const formatDate = (dateStr) => {
-  if (!dateStr) return "Updating...";
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("en-GB"); // DD/MM/YYYY
-};
-  
+    if (!dateStr) return "Updating...";
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-GB"); // DD/MM/YYYY
+  };
+
   // --- FETCH TOUR ---
   useEffect(() => {
     const loadData = async () => {
       try {
-        const res = await fetch(`http://localhost:8081/api/tours/${id}`);
+        const res = await fetch(`http://localhost:5000/api/tours/${id}`);
         const data = await res.json();
         if (data?.tour_id) {
           setTour({
             id: data.tour_id,
             tour_name: data.tour_name,
-            image_url: `http://localhost:8081${data.image_url}`,
+            image_url: `http://localhost:5000${data.image_url}`,
             start_date: data.start_date,
             end_date: data.end_date,
             period: data.period || "Updating...",
@@ -66,14 +66,27 @@ const BookPage = () => {
     return calcPriceFromBase(basePriceRaw);
   }, [tour, basePriceRaw]);
 
+  // Convert input string → int
+  const iAdult = parseInt(qtyAdult || 0, 10);
+  const iChild = parseInt(qtyChild || 0, 10);
+  const iSmall = parseInt(qtySmallChild || 0, 10);
+  const iInfant = parseInt(qtyInfant || 0, 10);
+
   const subtotalPeople =
-    qtyAdult * priceTable.adult +
-    qtyChild * priceTable.child +
-    qtySmallChild * priceTable.smallChild +
-    qtyInfant * priceTable.infant;
+    iAdult * priceTable.adult +
+    iChild * priceTable.child +
+    iSmall * priceTable.smallChild +
+    iInfant * priceTable.infant;
 
   const grandTotal = subtotalPeople;
-  const clampInt = (v, min = 0) => Math.max(min, parseInt(v || 0, 10));
+
+  // New input clamp
+  const clampInt = (value, min = 0) => {
+    if (value === "") return "";
+    let n = Number(value);
+    if (isNaN(n)) return "";
+    return n < min ? min : n;
+  };
 
   // --- AFTER ALL HOOKS → RETURN UI CONDITIONS ---
   if (loading) return <h2 style={{ textAlign: "center", marginTop: 60 }}>Loading...</h2>;
@@ -107,34 +120,87 @@ const BookPage = () => {
       <div className="form-row">
         <div className="form-group">
           <label>Adults</label>
-          <input type="number" min="1" value={qtyAdult} onChange={(e) => setQtyAdult(clampInt(e.target.value, 1))}/>
+          <input
+            type="number"
+            min="1"
+            value={qtyAdult}
+            onChange={(e) => setQtyAdult(clampInt(e.target.value, 1))}
+          />
         </div>
 
         <div className="form-group">
           <label>Children (5–11y)</label>
-          <input type="number" min="0" value={qtyChild} onChange={(e) => setQtyChild(clampInt(e.target.value, 0))}/>
+          <input
+            type="number"
+            min="0"
+            value={qtyChild}
+            onChange={(e) => setQtyChild(clampInt(e.target.value, 0))}
+          />
         </div>
 
         <div className="form-group">
           <label>Small Children (2–5y)</label>
-          <input type="number" min="0" value={qtySmallChild} onChange={(e) => setQtySmallChild(clampInt(e.target.value, 0))}/>
+          <input
+            type="number"
+            min="0"
+            value={qtySmallChild}
+            onChange={(e) => setQtySmallChild(clampInt(e.target.value, 0))}
+          />
         </div>
 
         <div className="form-group">
           <label>Infants (&lt;2y)</label>
-          <input type="number" min="0" value={qtyInfant} onChange={(e) => setQtyInfant(clampInt(e.target.value, 0))}/>
+          <input
+            type="number"
+            min="0"
+            value={qtyInfant}
+            onChange={(e) => setQtyInfant(clampInt(e.target.value, 0))}
+          />
         </div>
       </div>
+
+      {/* DETAILED TOUR PRICING */}
+      <h2 className="section-title">DETAILED TOUR PRICING</h2>
+
+      <table className="price-table">
+        <thead>
+          <tr>
+            <th>Price Type / Age</th>
+            <th>Adult (&gt;= 11y)</th>
+            <th>Child (5–11y)</th>
+            <th>Small Child (2–5y)</th>
+            <th>Infant (&lt;2y)</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Price</td>
+            <td>{formatPrice(priceTable.adult)}</td>
+            <td>{formatPrice(priceTable.child)}</td>
+            <td>{formatPrice(priceTable.smallChild)}</td>
+            <td>{formatPrice(priceTable.infant)}</td>
+          </tr>
+
+          <tr>
+            <td>Notes</td>
+            <td>Standard price</td>
+            <td>60% of adult price</td>
+            <td>30% of adult price</td>
+            <td>Free (must travel with an adult)</td>
+          </tr>
+        </tbody>
+      </table>
 
       {/* CUSTOMER FORM */}
       <h2 className="section-title">CUSTOMER INFORMATION</h2>
 
       <div className="customer-form">
-        <input placeholder="Full Name *" value={fullName} onChange={(e)=>setFullName(e.target.value)} />
-        <input placeholder="Email *" value={email} onChange={(e)=>setEmail(e.target.value)} />
-        <input placeholder="Phone Number *" value={phone} onChange={(e)=>setPhone(e.target.value)} />
-        <input placeholder="Address *" value={address} onChange={(e)=>setAddress(e.target.value)} />
-        <textarea placeholder="Notes" value={notes} onChange={(e)=>setNotes(e.target.value)} />
+        <input placeholder="Full Name *" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+        <input placeholder="Email *" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input placeholder="Phone Number *" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <input placeholder="Address *" value={address} onChange={(e) => setAddress(e.target.value)} />
+        <textarea placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
       </div>
 
       {/* TOTAL */}
@@ -152,10 +218,10 @@ const BookPage = () => {
             tour,
             customer: { fullName, email, phone, address, notes },
             passengers: {
-              adults: qtyAdult,
-              children: qtyChild,
-              smallChildren: qtySmallChild,
-              infants: qtyInfant
+              adults: iAdult,
+              children: iChild,
+              smallChildren: iSmall,
+              infants: iInfant
             },
             paymentMethod: "cash",
             totalAmount: grandTotal
