@@ -101,13 +101,20 @@ Each tour promotes Vietnamese culture and rural heritage.
 
 ---
 
-### 🗺️ 6. Region-Based Tour Filtering
-Travelers can explore tours by geographic region:
-- **Northern Vietnam**  
-- **Central Vietnam**  
-- **Southern Vietnam**  
+### 🤖 6. AI Chatbot – Smart Tour Assistant (Highlight Feature)
+AgriTour includes an integrated **AI-powered chatbot** that helps customers find suitable tours based on:
+- Travel date (e.g., Tet holiday, weekend)
+- Location preferences
+- Budget
+- Tour type (farmstay, harvesting, cooking, eco-tour…)
 
-Easy filtering makes it convenient to find the perfect farm experience.
+The AI assistant:
+- Pulls real tour data directly from the **database**
+- Gives instant, relevant suggestions
+- Helps users navigate tours faster
+- Enhances the overall user experience with natural conversation
+
+This is one of AgriTour’s most unique and innovative features.
 
 ---
 
@@ -115,7 +122,8 @@ Easy filtering makes it convenient to find the perfect farm experience.
 - Beautiful banner sections  
 - Promotion tour highlights  
 - Mission & Vision with nature-based backgrounds  
-- Clean and responsive interface across all devices  
+- Clean and responsive interface across all devices
+- Region-based tour filtering
 
 ---
 
