@@ -9,6 +9,10 @@ const Tour = () => {
   const { region } = useContext(StoreContext);
   const regionSectionRef = useRef(null);
   const [dbTours, setDbTours] = useState([]);
+  
+  // Backend URLs
+  const API_URL = import.meta.env.VITE_API_URL;     // https://agritourweb.onrender.com/api
+  const API_BASE = import.meta.env.VITE_API_BASE;   // https://agritourweb.onrender.com
 
   // Map region_id → region name
   const regionMapDB = {
@@ -34,7 +38,7 @@ const Tour = () => {
   const normalizeTour = (t) => ({
     id: t.tour_id,
     tour_name: t.tour_name,
-    image_url: t.image_url ? `http://localhost:5000${t.image_url}` : null,
+    image_url: t.image_url ? `${API_BASE}${t.image_url}` : null,
     start_date: formatDate(t.start_date),
     end_date: formatDate(t.end_date),
     period: calcPeriod(t.start_date, t.end_date),
@@ -45,7 +49,7 @@ const Tour = () => {
 
   // Lấy tour backend
   useEffect(() => {
-    fetch("http://localhost:5000/api/tours")
+    fetch(`${API_URL}/tours`)
       .then((res) => res.json())
       .then((data) => {
         const approved = data.filter(

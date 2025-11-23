@@ -12,15 +12,14 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000",
+        url: "https://agritourweb.onrender.com", // sửa ở đây!
       },
     ],
   },
 
-  // FIX QUAN TRỌNG: dùng path tuyệt đối
   apis: [
     path.join(__dirname, "routes/*.js"),
-    path.join(__dirname, "controllers/*.js"), // phòng khi bạn viết comment trong controller
+    path.join(__dirname, "controllers/*.js"),
   ],
 };
 

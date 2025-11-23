@@ -44,10 +44,13 @@ const TourDetail = () => {
   const [loading, setLoading] = useState(true);
   const [showLogin, setShowLogin] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL;    
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
   useEffect(() => {
     const loadTour = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/tours/${id}`);
+        const res = await fetch(`${API_URL}/tours/${id}`);
         const data = await res.json();
 
         if (!data || !data.tour_id) {
@@ -57,7 +60,7 @@ const TourDetail = () => {
             id: data.tour_id,
             tour_name: data.tour_name,
             image_url: data.image_url
-              ? `http://localhost:5000${data.image_url}`
+              ? `${API_BASE}${data.image_url}`
               : "/fallback.jpg",
             description: data.description || "No description available.",
             location: data.location || "Updating...",

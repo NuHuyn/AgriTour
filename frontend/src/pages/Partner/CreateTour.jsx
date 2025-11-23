@@ -4,6 +4,8 @@ import "./PartnerTours.css";
 
 const CreateTour = ({ user }) => {
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [form, setForm] = useState({
     tour_name: "",
     description: "",
@@ -51,7 +53,7 @@ const CreateTour = ({ user }) => {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/tours", {
+      const res = await fetch(`${API_URL}/tours`, {
         method: "POST",
         headers: { Authorization: `Bearer ${user.token}` },
         body: formData,

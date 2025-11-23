@@ -23,8 +23,8 @@ const LoginPopup = ({ setShowLogin, setUser }) => {
 
   const url =
     currState === "Login"
-      ? "http://localhost:5000/api/auth/login"
-      : "http://localhost:5000/api/auth/register";
+      ? `${API_URL}/auth/login`
+      : `${API_URL}/auth/register`;
 
   const body =
     currState === "Login"

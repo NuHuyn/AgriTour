@@ -24,6 +24,8 @@ const BookPage = () => {
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
 
+  const API_URL = import.meta.env.VITE_API_URL; 
+
   const formatDate = (dateStr) => {
     if (!dateStr) return "Updating...";
     const d = new Date(dateStr);
@@ -34,13 +36,13 @@ const BookPage = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/tours/${id}`);
+        const res = await fetch(`${API_URL}/api/tours/${id}`);
         const data = await res.json();
         if (data?.tour_id) {
           setTour({
             id: data.tour_id,
             tour_name: data.tour_name,
-            image_url: `http://localhost:5000${data.image_url}`,
+            image_url: `${API_URL}${data.image_url}`,
             start_date: data.start_date,
             end_date: data.end_date,
             period: data.period || "Updating...",

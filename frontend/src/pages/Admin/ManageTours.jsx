@@ -13,12 +13,15 @@ const ManageTours = () => {
   const [regionFilter, setRegionFilter] = useState("");
   const [selectedTour, setSelectedTour] = useState(null);
 
+
+   const API_URL = import.meta.env.VITE_API_URL;
+
   // ===========================
   // Fetch tours
   // ===========================
   const fetchTours = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/tours/admin/all", {
+      const res = await fetch(`${API_URL}/tours/admin/all`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -54,7 +57,7 @@ const ManageTours = () => {
 
   try {
     const res = await fetch(
-      `http://localhost:5000/api/tours/review/${tour_id}`,
+      `${API_URL}/tours/review/${tour_id}`,
       {
         method: "PUT",
         headers: {

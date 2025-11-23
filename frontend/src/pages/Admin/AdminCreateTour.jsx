@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Admin.css';
 const AdminCreateTour = ({ user }) => {
+
+  const API_URL = import.meta.env.VITE_API_URL; 
+
   const navigate = useNavigate();
     const [form, setForm] = useState({
       tour_name: "",
@@ -32,7 +35,7 @@ const AdminCreateTour = ({ user }) => {
   
       try {
         setLoading(true);
-        const res = await fetch("http://localhost:5000/api/tours", {
+        const res = await fetch(`${API_URL}/tours`, {
           method: "POST",
           headers: { Authorization: `Bearer ${user.token}` },
           body: formData,

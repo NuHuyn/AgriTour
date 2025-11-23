@@ -13,6 +13,8 @@ const ConfirmBookingPage = () => {
   const { removeBooking } = useCart();
   const { addUpcomingTour } = useUserTours();
 
+  const API_URL = import.meta.env.VITE_API_URL;   
+
   const formatDate = (dateStr) => {
   if (!dateStr) return "Updating...";
   const d = new Date(dateStr);
@@ -39,7 +41,7 @@ const ConfirmBookingPage = () => {
         passengers.infants;
 
       //  CALL BACKEND: CREATE BOOKING
-      const response = await fetch("http://localhost:5000/api/bookings", {
+      const response = await fetch(`${API_URL}/api/bookings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
