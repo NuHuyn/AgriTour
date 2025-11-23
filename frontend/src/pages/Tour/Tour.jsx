@@ -99,7 +99,7 @@ const Tour = () => {
               <p>Slot: {t.available_slots}</p>
 
               <div className="tour-price-row">
-                <p className="tour-price">{t.price}$</p>
+                <p className="tour-price">{Number(t.price)}$</p>
                 <Link to={`/tour-details/${t.id}`}>
                   <button className="view-details-btn">View Details</button>
                 </Link>
@@ -124,7 +124,7 @@ const Tour = () => {
                 <p>Slot: {t.available_slots}</p>
 
                 <div className="tour-price-row">
-                  <p className="tour-price">{t.price}$</p>
+                  <p className="tour-price">{Number(t.price)}$</p>
                   <Link to={`/tour-details/${t.id}`}>
                     <button className="view-details-btn">View Details</button>
                   </Link>
@@ -154,7 +154,7 @@ const Tour = () => {
                   <p>Slot: {t.available_slots}</p>
 
                   <div className="tour-price-row">
-                    <p className="tour-price">{t.price}$</p>
+                    <p className="tour-price">{Number(t.price)}$</p>
                     <Link to={`/tour-details/${t.id}`}>
                       <button className="view-details-btn">View Details</button>
                     </Link>

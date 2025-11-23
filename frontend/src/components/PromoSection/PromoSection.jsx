@@ -51,7 +51,7 @@ const PromoSection = () => {
       {/* Banner section */}
       <div className="promo-banner">
         <img
-          src="https://vietnamembassy-england.org/wp-content/uploads/2019/08/what-is-the-weather-like-in-sapa-vietnam-2.jpg"
+          src="https://images.unsplash.com/photo-1579613259121-29683cd01432?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Explore Banner"
         />
 

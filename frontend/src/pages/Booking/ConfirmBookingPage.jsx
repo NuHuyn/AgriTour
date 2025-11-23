@@ -13,16 +13,20 @@ const ConfirmBookingPage = () => {
   const { removeBooking } = useCart();
   const { addUpcomingTour } = useUserTours();
 
-  const API_URL = import.meta.env.VITE_API_URL;   
+  const API_URL = import.meta.env.VITE_API_URL;
+  const API_BASE = import.meta.env.VITE_API_BASE;
 
   const formatDate = (dateStr) => {
-  if (!dateStr) return "Updating...";
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("en-GB"); // DD/MM/YYYY
-};
+    if (!dateStr) return "Updating...";
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-GB"); // DD/MM/YYYY
+  };
   if (!state) {
     return <h2 style={{ padding: 40 }}>No booking data found.</h2>;
   }
+
+  
+
 
   const { tempId, tour, customer, passengers, paymentMethod, totalAmount } = state;
 
@@ -41,7 +45,7 @@ const ConfirmBookingPage = () => {
         passengers.infants;
 
       //  CALL BACKEND: CREATE BOOKING
-      const response = await fetch(`${API_URL}/api/bookings`, {
+      const response = await fetch(`${API_URL}/bookings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

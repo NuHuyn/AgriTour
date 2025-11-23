@@ -1,18 +1,22 @@
 export function parsePrice(priceString) {
   if (priceString == null) return 0;
 
-  // Nếu là số → trả lại luôn
   if (typeof priceString === "number") return priceString;
 
-  // Nếu là string → xử lý
-  return Number(priceString.replace(/[^\d]/g, ""));
+  // Remove $ and spaces
+  priceString = priceString.replace(/[$\s]/g, "");
+
+  // Remove thousand separators
+  priceString = priceString.replace(/,/g, "");
+
+  return Number(priceString);
 }
 
 export const formatPrice = (value) => {
-  if (isNaN(value)) return "$0";
-  return `$${value.toLocaleString("en-US")}`;
+  const num = Number(value);
+  if (isNaN(num)) return "$0";
+  return `$${num}`;
 };
-
 
 export function calcPriceFromBase(basePrice) {
   return {
