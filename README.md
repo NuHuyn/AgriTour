@@ -24,9 +24,7 @@ These accounts allow you to test different permission levels across the system (
 
 ---
 
-## 📌 Introduction
-
-## 🌿 Summary
+## 🌿 Introduction
 
 AgriTour is a Vietnamese agritourism platform that connects local farmers with travelers seeking authentic, nature-rich experiences.  
 Customers can explore real farm life, participate in hands-on activities, and enjoy peaceful countryside environments — all hosted and managed directly by farmers.  
@@ -49,7 +47,7 @@ The platform highlights authentic farm life, allowing travelers to join activiti
 
 ---
 
-### 👨‍🌾 2. Farmer (Partner) Features
+### 👨‍🌾 2. Partner Features
 Farmers act as Partners and have full control over the tours they create.  
 They can:
 - Create new farm experience tours  
