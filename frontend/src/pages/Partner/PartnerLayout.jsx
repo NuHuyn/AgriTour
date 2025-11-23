@@ -5,7 +5,7 @@ import PartnerTours from './PartnerTours';
 import PartnerCustomers from './PartnerCustomers';
 import PartnerReports from './PartnerReports';
 import PartnerSettings from './PartnerSettings';
-import './partnerLayout.css';
+import './PartnerLayout.css';
 import CreateTour from './CreateTour';
 import {
   FaTachometerAlt,
