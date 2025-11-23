@@ -86,7 +86,7 @@ const Chatbot = () => {
               img: trip1,
               name: "Vinh Long Farm & Lotus Experience",
               price: "$30",
-              link: "http://localhost:5173/tour-details/38"
+              link: "https://agriculturaltour.onrender.com/tour-details/38"
             },
 
             {
@@ -94,7 +94,7 @@ const Chatbot = () => {
               img: river2,
               name: "Ha Tien Shell Beach Rowing Experience",
               price: "$30",
-              link: "http://localhost:5173/tour-details/36"
+              link: "https://agriculturaltour.onrender.com/tour-details/36"
             }
           ]
         });
@@ -124,7 +124,7 @@ const Chatbot = () => {
               img: trip1,
               name: "Vinh Long Farm & Lotus Experience",
               price: "$80",
-              link: "http://localhost:5173/tour-details/38"
+              link: "https://agriculturaltour.onrender.com/tour-details/38"
             }
           ]
         });
