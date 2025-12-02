@@ -154,7 +154,7 @@ This is one of AgriTour’s most unique and innovative features.
 ### **Backend**
 - Node.js  
 - Express.js  
-- MongoDB / Mongoose  
+- Mysql
 - JWT Authentication  
 - Swagger  
 
